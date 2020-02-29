@@ -1,0 +1,8 @@
+<h3>Editar reparacion component</h3>
+<p>Target = {{target}}</p>
+<form [formGroup]="dispositivo">
+    <input type="text" formControlName="nombre" required="required" placeholder="dispositivo">
+    <input type="text" formControlName="marca" required="required" placeholder="marca">
+    <input type="text" formControlName="estado" required="required" placeholder="estado">
+    <button type="submit" (click)="generarDispositivo()">Enviar</button>
+</form>

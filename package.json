@@ -1,0 +1,19 @@
+{
+  "name": "power-service-app",
+  "version": "1.0.0",
+  "description": "Aplicación para la gestión de un taller de reparaciones",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon servidor/index.js"
+  },
+  "author": "Rubén Cabrera Royo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2"
+  }
+}

@@ -1,0 +1,11 @@
+<h3>Detalle reparacion component</h3>
+
+<div *ngIf="reparacionid == 0">
+    <pre>{{rep | json}}</pre>
+    <button (click)="editar('algo')">editar</button>
+    <button (click)="eliminar()">cancelar</button>
+    <button *ngIf="rep.estado == 'Pendiente de revisión'" (click)="eliminar()">Retornar orden</button>
+    <button *ngIf="rep.estado == 'Lista para la entrega'" (click)="eliminar()">Entregar orden</button>
+</div>
+
+<app-editar-reparacion *ngIf="editable" [target]="edittarget" [orden]="rep" (editada)="actualizar($event)"></app-editar-reparacion>
