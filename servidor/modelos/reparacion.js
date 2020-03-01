@@ -5,6 +5,7 @@ const reparacionSchema = new Schema({
     orden: {type: Number, required: true},
     estado: {type: String, required: true},
     fechacreacion: {type: Date, default: Date.now()},
+    ultimaedicion: {type: Date, default: Date.now()},
     taller: {type: String, required: true},
     cliente: {
         nombre: {type: String, required: true},
@@ -28,12 +29,13 @@ const reparacionSchema = new Schema({
     costes: {type: [
         {
             servicio: { type: String, required: true},
-            coste: { type: Number, required: true}
+            coste: { type: Number, required: true},
         }
     ], required: false, _id: false},
     log: {type: [{
         usuario: { type: String, required: true},
         mensaje: { type: String, required: true},
+        fecha: { type: Date, default: Date.now()}
     }], required: false, _id: false}
 })
 

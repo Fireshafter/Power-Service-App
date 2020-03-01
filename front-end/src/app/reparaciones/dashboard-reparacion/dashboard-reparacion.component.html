@@ -1,5 +1,7 @@
 <h3>Componente Dashboard</h3>
 
-<div style="font-size: small;" *ngFor="let resguardo of resguardos" routerLink="/reparaciones/detalles" routerLinkActive="active">
+<div style="font-size: small;" *ngFor="let resguardo of resguardos" (click)="verDetalle(resguardo._id)">
     {{resguardo._id}} - {{resguardo.orden}} - {{resguardo.cliente.nombre | json}} - {{resguardo.lastedit | date:'medium'}} - {{resguardo.dispositivo}} - {{resguardo.servicio}} - {{resguardo.descripcion}}
 </div>
+
+<p>hola</p>

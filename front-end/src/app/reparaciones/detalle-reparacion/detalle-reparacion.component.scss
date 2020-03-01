@@ -1,0 +1,53 @@
+#boton-accion{
+    position: fixed;
+    font-size: x-large;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+}
+
+.info td{
+    width: 50%;
+}
+#titulo h1{
+    margin-bottom: 30px;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.collapse-inf{
+    background-color: rgb(200, 200, 200);
+    border-radius:3px;
+    padding: 0;
+    padding-bottom: 2px;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.collapse-inf p{
+    background-color: rgb(66, 66, 66);
+    color: white;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 2px;
+    padding-left: 10px;
+    margin: 0;
+    width: 100%;
+}
+
+.collapse-inf div{
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.logs{
+    margin-top: 30px;
+}
+
+.log{
+    background-color: rgb(200, 200, 200);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: solid 5px rgb(145, 145, 145);
+}

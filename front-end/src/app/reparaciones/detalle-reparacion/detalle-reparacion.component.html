@@ -1,11 +1,121 @@
-<h3>Detalle reparacion component</h3>
+<div id="componente" *ngIf="rep">
+<div id="titulo" style="position: relative;">
+    <h1 style="float: left;">E234-{{rep.orden}}-R-C</h1>
+    <h4 style="position: absolute; bottom: 1; left: 315px; margin: 0; margin-top: 13px;">{{rep.estado}}</h4>
+</div>
 
-<div *ngIf="reparacionid == 0">
-    <pre>{{rep | json}}</pre>
-    <button (click)="editar('algo')">editar</button>
-    <button (click)="eliminar()">cancelar</button>
-    <button *ngIf="rep.estado == 'Pendiente de revisión'" (click)="eliminar()">Retornar orden</button>
-    <button *ngIf="rep.estado == 'Lista para la entrega'" (click)="eliminar()">Entregar orden</button>
+<div id="informacion" style="clear: left;">
+
+    <div class="collapse-inf col-9" >
+        <p (click)="general=!general">
+            <b>INFORMACIÓN GENERAL</b>
+        </p>
+        <div>
+            <table class="container-fluid info" [ngbCollapse]="general">
+                <tr>
+                    <td>Orden de trabajo</td>
+                    <td>E234-{{rep.orden}}-R-C</td>
+                </tr>
+                <tr>
+                    <td>Identificador</td>
+                    <td>{{rep._id}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de creación</td>
+                    <td>{{rep.fechacreacion | date:'medium'}}</td>
+                </tr>
+                <tr>
+                    <td>Taller</td>
+                    <td>{{rep.taller}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse-inf col-9">
+        <p (click)="cliente=!cliente">
+            <b>CLIENTE</b>
+        </p>
+        <div>
+            <table class="container-fluid info" [ngbCollapse]="cliente">
+                <tr>
+                    <td>Nombre</td>
+                    <td>{{rep.cliente.nombre}}</td>
+                </tr>
+                <tr>
+                    <td>Apellidos</td>
+                    <td>{{rep.cliente.apellidos}}</td>
+                </tr>
+                <tr>
+                    <td>Dirección y numero</td>
+                    <td>{{rep.cliente.calle}} {{rep.cliente.numero}}</td>
+                </tr>
+                <tr>
+                    <td>Código postal y Ciudad</td>
+                    <td>{{rep.cliente.codigopostal}} {{rep.cliente.ciudad}}</td>
+                </tr>
+                <tr>
+                    <td>Telefono</td>
+                    <td>{{rep.cliente.telefono}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{rep.cliente.correo}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse-inf col-9">
+        <p (click)="dispositivo=!dispositivo">
+            <b>DISPOSITIVO</b>
+        </p>
+        <div>
+            <table class="container-fluid info" [ngbCollapse]="dispositivo">
+                <tr>
+                    <td>Terminal</td>
+                    <td>{{rep.dispositivo.nombre}}</td>
+                </tr>
+                <tr>
+                    <td>Marca</td>
+                    <td>{{rep.dispositivo.marca}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de creación</td>
+                    <td>{{rep.fechacreacion | date:'medium'}}</td>
+                </tr>
+                <tr>
+                    <td>Taller</td>
+                    <td>{{rep.taller}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse-inf col-9">
+        <p (click)="costes=!costes">
+            <b>COSTES</b>
+        </p>
+        <div>
+            <table class="container-fluid info" [ngbCollapse]="costes">
+                <tr *ngFor="let coste of rep.costes">
+                    <td>{{coste.servicio}}</td>
+                    <td>{{coste.coste | currency:' '}}€</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="logs container-fluid">
+    <h3>Historial de la orden</h3>
+    <div class="log" *ngFor="let log of rep.log">
+        <h3>{{log.mensaje}}</h3>
+        <b>{{log.usuario}}</b>
+        <span style="float: right; margin-right: 10px;">{{log.fecha | date:'medium'}}</span>
+    </div>
+</div>
 </div>
 
 <app-editar-reparacion *ngIf="editable" [target]="edittarget" [orden]="rep" (editada)="actualizar($event)"></app-editar-reparacion>

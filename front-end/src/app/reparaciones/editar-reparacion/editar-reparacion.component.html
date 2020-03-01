@@ -1,6 +1,16 @@
 <h3>Editar reparacion component</h3>
 <p>Target = {{target}}</p>
-<form [formGroup]="dispositivo">
+
+<form *ngIf="target == 'dispositivo'" [formGroup]="dispositivo">
+    <input type="text" formControlName="nombre" required="required" placeholder="dispositivo">
+    <input type="text" formControlName="marca" required="required" placeholder="marca">
+    <input type="text" formControlName="estado" required="required" placeholder="estado">
+    <input type="text" formControlName="accesorios" required="required" placeholder="accesorios">
+    <input type="text" formControlName="sn" required="required" placeholder="numero de serie">
+    <button type="submit" (click)="generarDispositivo()">Enviar</button>
+</form>
+
+<form *ngIf="target == 'dispositivo'" [formGroup]="dispositivo">
     <input type="text" formControlName="nombre" required="required" placeholder="dispositivo">
     <input type="text" formControlName="marca" required="required" placeholder="marca">
     <input type="text" formControlName="estado" required="required" placeholder="estado">

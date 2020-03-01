@@ -26,6 +26,8 @@ export class EditarReparacionComponent implements OnInit {
       nombre: [this.orden.dispositivo.nombre, [Validators.required]],
       marca: [this.orden.dispositivo.marca, [Validators.required]],
       estado: ['', [Validators.required]],
+      accesorios: ['', [Validators.required]],
+      sn: ['', [Validators.required]]
     }); 
   }
 
@@ -36,7 +38,8 @@ export class EditarReparacionComponent implements OnInit {
     let dispositivo = this.dispositivo.value;
     let reparacion = this.orden;
     reparacion.dispositivo = dispositivo;
-    reparacion.log.push(new Cambio('developer', 'Se ha editado el dispositivo', new Date(Date.now())));
+    reparacion.log.push(new Cambio('Developer', 'Se ha editado el dispositivo', new Date(Date.now())));
+    reparacion.ultimaedicion = new Date(Date.now());
 
     console.log(reparacion);
     this.editada.emit(reparacion)

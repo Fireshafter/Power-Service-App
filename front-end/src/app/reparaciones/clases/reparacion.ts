@@ -9,7 +9,7 @@ export class Reparacion {
         public orden: Number,
         public estado: String,
         public fechaentrada: Date,
-        public lastedit: Date,
+        public ultimaedicion: Date,
         public taller: String,
         public cliente: Cliente,
         public dispositivo: Dispositivo,

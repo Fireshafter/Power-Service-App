@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReparacionService } from '../reparacion.service';
 
 @Component({
   selector: 'app-dashboard-reparacion',
