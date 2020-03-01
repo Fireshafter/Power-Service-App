@@ -9,10 +9,23 @@
 .info td{
     width: 50%;
 }
+
 #titulo h1{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     margin-top: 7px;
-    margin-left: 5px;
+    margin-left: 20px;
+}
+
+#sidewrapper{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+
+#opciones{
+    
+    width: 95%;
+    float: right;
 }
 
 .collapse-inf{
@@ -45,9 +58,18 @@
 }
 
 .log{
-    background-color: rgb(200, 200, 200);
+    background-color: white;
     padding: 5px;
+    padding-left: 15px;
     border-radius: 5px;
     margin-top: 10px;
-    border: solid 5px rgb(145, 145, 145);
+}
+
+.boton{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+    width: 80%;
 }

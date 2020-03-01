@@ -4,6 +4,8 @@ export class Dispositivo {
     constructor(
         public nombre: string,
         public marca: string,
-        public estados: string[]
+        public estado: String[],
+        public accesorios: String[],
+        public sn: String
     ){}
 }

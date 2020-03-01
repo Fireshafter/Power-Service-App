@@ -1,12 +1,12 @@
 <div id="componente" *ngIf="rep">
 <div id="titulo" style="position: relative;">
     <h1 style="float: left;">E234-{{rep.orden}}-R-C</h1>
-    <h4 style="position: absolute; bottom: 1; left: 315px; margin: 0; margin-top: 13px;">{{rep.estado}}</h4>
+    <h4 style="position: absolute; bottom: 1; left: 335px; margin: 0; margin-top: 20px;">{{rep.estado}}</h4>
 </div>
 
-<div id="informacion" style="clear: left;">
+<div id="centerwrapper" class="col-9" style="clear: left;">
 
-    <div class="collapse-inf col-9" >
+    <div class="collapse-inf informacion" >
         <p (click)="general=!general">
             <b>INFORMACIÓN GENERAL</b>
         </p>
@@ -31,8 +31,30 @@
             </table>
         </div>
     </div>
+    
+    <div class="collapse-inf informacion" >
+        <p (click)="orden=!orden">
+            <b>ORDEN</b>
+        </p>
+        <div>
+            <table class="container-fluid info" [ngbCollapse]="orden">
+                <tr>
+                    <td>Estado</td>
+                    <td>{{rep.estado}}</td>
+                </tr>
+                <tr>
+                    <td>Procedimiento</td>
+                    <td>{{rep.titulo}}</td>
+                </tr>
+                <tr>
+                    <td>Descripción del problema</td>
+                    <td>{{rep.descripcion}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <div class="collapse-inf col-9">
+    <div class="collapse-inf informacion">
         <p (click)="cliente=!cliente">
             <b>CLIENTE</b>
         </p>
@@ -66,7 +88,7 @@
         </div>
     </div>
 
-    <div class="collapse-inf col-9">
+    <div class="collapse-inf informacion">
         <p (click)="dispositivo=!dispositivo">
             <b>DISPOSITIVO</b>
         </p>
@@ -81,18 +103,22 @@
                     <td>{{rep.dispositivo.marca}}</td>
                 </tr>
                 <tr>
-                    <td>Fecha de creación</td>
-                    <td>{{rep.fechacreacion | date:'medium'}}</td>
+                    <td>Estado</td>
+                    <td>{{rep.dispositivo.estado.join(', ')}}</td>
                 </tr>
                 <tr>
-                    <td>Taller</td>
+                    <td>Accesorios</td>
+                    <td>{{rep.dispositivo.accesorios.join(', ')}}</td>
+                </tr>
+                <tr>
+                    <td>Accesorios</td>
                     <td>{{rep.taller}}</td>
                 </tr>
             </table>
         </div>
     </div>
 
-    <div class="collapse-inf col-9">
+    <div class="collapse-inf informacion">
         <p (click)="costes=!costes">
             <b>COSTES</b>
         </p>
@@ -108,14 +134,35 @@
 
 </div>
 
-<div class="logs container-fluid">
-    <h3>Historial de la orden</h3>
-    <div class="log" *ngFor="let log of rep.log">
-        <h3>{{log.mensaje}}</h3>
-        <b>{{log.usuario}}</b>
-        <span style="float: right; margin-right: 10px;">{{log.fecha | date:'medium'}}</span>
+<div id="sidewrapper"class="col-3">
+    <div id="opciones" class="collapse-inf" >
+        <p (click)="opciones=!opciones">
+            <b>OPCIONES</b>
+        </p>
+        <div [ngbCollapse]="opciones">
+            <button type="button" class="btn btn-warning boton" (click)="editar('orden')">Editar Orden</button>
+            <button type="button" class="btn btn-warning boton" (click)="editar('cliente')">Editar Cliente</button>
+            <button type="button" class="btn btn-warning boton" (click)="editar('dispositivo')">Editar Dispositivo</button>
+            <button type="button" class="btn btn-warning boton" (click)="editar('costes')">Editar Costes</button>
+        </div>
     </div>
+</div>
+
+<div class="logs container-fluid">
+    <div class="collapse-inf">
+        <p (click)="historial=!historial">
+            <b>HISTORIAL DE CAMBIOS</b>
+        </p>
+        <div [ngbCollapse]="historial">
+            <div class="log" *ngFor="let log of rep.log">
+                <h3>{{log.mensaje}}</h3>
+                <b>{{log.usuario}}</b>
+                <span style="float: right; margin-right: 10px;">{{log.fecha | date:'medium'}}</span>
+            </div>
+        </div>
+    </div>
+    
 </div>
 </div>
 
-<app-editar-reparacion *ngIf="editable" [target]="edittarget" [orden]="rep" (editada)="actualizar($event)"></app-editar-reparacion>
+<app-editar-reparacion *ngIf="editable" [target]="edittarget" [orden]="rep" (actualizacionEvent)="actualizar($event)"></app-editar-reparacion>
