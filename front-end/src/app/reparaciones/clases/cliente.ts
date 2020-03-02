@@ -4,7 +4,7 @@ export class Cliente {
         public apellidos: String,
         public calle: String,
         public numero: Number,
-        public cpostal: Number,
+        public codigopostal: Number,
         public ciudad: String,
         public pais: String,
         public telefono: String,

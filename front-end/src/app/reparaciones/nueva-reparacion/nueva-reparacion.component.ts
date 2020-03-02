@@ -28,16 +28,16 @@ export class NuevaReparacionComponent implements OnInit {
 
   }
 
-  generar(){
-    if(this.dispositivo.invalid)
-      return alert('Formulario invalido');
+  // generar(){
+  //   if(this.dispositivo.invalid)
+  //     return alert('Formulario invalido');
 
-    let dispositivo = this.dispositivo.value;
-    let reparacion:Reparacion = new Reparacion(Math.floor(Math.random() * 100), Math.floor(Math.random() * 100000), 'Pendiente de revisión', new Date(Date.now()), new Date(Date.now()), 'Power Service', new Cliente('Ruben', 'Cabrera Royo', 'Calle Rio Cenia', 6, 12005, 'Castellón', 'España', '644258066', 'fireshafter@hotmail.com'), new Dispositivo(dispositivo.nombre, dispositivo.marca, dispositivo.estado.replace(/\s/g, "").split(',')), 'datos.servicio', 'datos.descripcion', [new Servicio('Mano de obra estándar', 29)], [])
+  //   let dispositivo = this.dispositivo.value;
+  //   let reparacion:Reparacion = new Reparacion(Math.floor(Math.random() * 100), Math.floor(Math.random() * 100000), 'Pendiente de revisión', new Date(Date.now()), new Date(Date.now()), 'Power Service', new Cliente('Ruben', 'Cabrera Royo', 'Calle Rio Cenia', 6, 12005, 'Castellón', 'España', '644258066', 'fireshafter@hotmail.com'), new Dispositivo(dispositivo.nombre, dispositivo.marca, dispositivo.estado.replace(/\s/g, "").split(',')), 'datos.servicio', 'datos.descripcion', [new Servicio('Mano de obra estándar', 29)], [])
 
-    console.log(reparacion);
-    this.crearNuevaReparacionEvent.emit(reparacion)
-    this.dispositivo.reset();
-  }
+  //   console.log(reparacion);
+  //   this.crearNuevaReparacionEvent.emit(reparacion)
+  //   this.dispositivo.reset();
+  // }
 
 }

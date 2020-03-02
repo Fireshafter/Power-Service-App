@@ -41,4 +41,8 @@ export class DetalleReparacionComponent implements OnInit {
     this.editable = false;
   }
 
+  cerrarVentana(){
+    this.editable = false;
+  }
+
 }

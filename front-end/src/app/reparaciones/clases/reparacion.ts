@@ -13,7 +13,7 @@ export class Reparacion {
         public taller: String,
         public cliente: Cliente,
         public dispositivo: Dispositivo,
-        public servicio: String,
+        public titulo: String,
         public descripcion: String,
         public costes: Servicio[],
         public log: Cambio[],
