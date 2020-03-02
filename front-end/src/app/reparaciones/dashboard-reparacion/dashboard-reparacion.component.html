@@ -1,7 +1,19 @@
-<h3>Componente Dashboard</h3>
+<div id="centralWrapper" class="col-9" *ngFor="let resguardo of resguardos" (click)="verDetalle(resguardo._id)">
+    <div class="orden">
+        <span class="norden">{{resguardo.orden}}</span>
+        <span class="cliente">{{resguardo.cliente.nombre}} {{resguardo.cliente.apellidos}}</span>
+        <div class="dispositivo">
+            <span class="disp">{{resguardo.dispositivo.nombre}}</span>
+            <span>{{resguardo.titulo}}</span>
+        </div>
+        <span class="estado">{{resguardo.estado}}</span>
+        <span class="fecha">{{resguardo.fechacreacion | date:'short'}}</span>
+        <span class="dias" *ngIf="getDays(resguardo.fechacreacion) as delta">{{delta | number:'1.0-0'}} Dias</span>
+    </div>
+</div>
 
-<div style="font-size: small;" *ngFor="let resguardo of resguardos" (click)="verDetalle(resguardo._id)">
-    {{resguardo._id}} - {{resguardo.orden}} - {{resguardo.cliente.nombre | json}} - {{resguardo.lastedit | date:'medium'}} - {{resguardo.dispositivo}} - {{resguardo.servicio}} - {{resguardo.descripcion}}
+<div id="sideWrapper" class="col-3">
+    <button (click)="ventanaCrear=true" class="btn btn-info">Nuevo Resguardo</button>
 </div>
 
 <app-nueva-reparacion *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()" (crearReparacionEvent)="crear($event)"></app-nueva-reparacion>

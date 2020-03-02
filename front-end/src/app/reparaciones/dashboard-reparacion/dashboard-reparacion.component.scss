@@ -1,0 +1,60 @@
+#centralWrapper{
+}
+
+#sideWrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.orden{
+    background-color: rgb(199, 199, 199);
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    height: 90px;
+}
+
+.norden{
+    position: absolute;
+    font-size: x-large;
+    font-weight: bolder;
+    top: 5px;
+}
+
+.cliente{
+    position: absolute;
+    top: 35px;
+}
+
+.dispositivo{
+    position: absolute;
+    top: 60px;
+}
+
+.disp{
+    font-size: large;
+    font-weight: bolder;
+    margin-right: 7px;
+}
+
+.estado{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: large;
+}
+
+.dias{
+    position: absolute;
+    top: 27px;
+    right: 10px;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.fecha{
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
