@@ -5,7 +5,6 @@ import { Cambio } from './cambio';
 
 export class Reparacion {
     constructor(
-        public _id: Number,
         public orden: Number,
         public estado: String,
         public fechaentrada: Date,
@@ -17,6 +16,7 @@ export class Reparacion {
         public descripcion: String,
         public costes: Servicio[],
         public log: Cambio[],
+        public _id?: Number
         
     ){
 

@@ -4,4 +4,4 @@
     {{resguardo._id}} - {{resguardo.orden}} - {{resguardo.cliente.nombre | json}} - {{resguardo.lastedit | date:'medium'}} - {{resguardo.dispositivo}} - {{resguardo.servicio}} - {{resguardo.descripcion}}
 </div>
 
-<p>hola</p>
+<app-nueva-reparacion *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()" (crearReparacionEvent)="crear($event)"></app-nueva-reparacion>

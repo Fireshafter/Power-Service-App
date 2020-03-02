@@ -1,0 +1,33 @@
+#formularioDispositivo{
+    width: 70%;
+    background-color: rgb(224, 224, 224);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -35%;
+    display: block;
+    padding: 30px;
+    border-radius: 10px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    z-index: 10;
+}
+
+.form-row{
+    margin-bottom: 1px;
+}
+
+#enviar{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+#lostfocus{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(66, 66, 66, 0.5);
+}

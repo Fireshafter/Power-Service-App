@@ -1,8 +1,155 @@
 <h3>Componente nueva reparación</h3>
 
-<form [formGroup]="dispositivo">
-    <input type="text" formControlName="nombre" required="required" placeholder="dispositivo">
-    <input type="text" formControlName="marca" required="required" placeholder="marca">
-    <input type="text" formControlName="estado" required="required" placeholder="estado">
-    <button type="submit" (click)="generar()">Enviar</button>
-</form>
+<div id="formularioDispositivo" class="center">
+    <form *ngIf="reparacion" [formGroup]="reparacion">
+        <h3>Orden</h3>
+
+        <div class="form-row">
+            <label for="nombredispositivo" class="col-2 col-form-label">Servicio</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="titulo" id="nombredispositivo" required="required" placeholder="Servicio">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="descripcionorden" class="col-2 col-form-label">Descripción</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="descripcion" id="descripcionorden" required="required" placeholder="Descripción" />
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="estadoorden" class="col-2 col-form-label">Calle</label>
+            <div class="col-10">
+                <select class="custom-select" formControlName="estado" id="estadoorden" required="required" placeholder="Estado">
+                    <option value="Pendiente de revisión">Pendiente de revisión</option>
+                    <option value="Pendiente de presupuesto">Pendiente de presupuesto</option>
+                    <option value="En reparación">En reparación</option>
+                    <option value="Esperando pieza">Esperando pieza</option>
+                    <option value="Listo para la entrega">Listo para la entrega</option>
+                    <option value="Finalizada">Finalizada</option>
+                  </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="numerocliente" class="col-2 col-form-label">Número</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="taller" id="numerocliente" required="required" placeholder="Número de Serie">
+            </div>
+        </div>
+
+    </form>
+
+        <hr />
+
+        <h3>Dispositivo</h3>
+    
+    <form *ngIf="reparacion" [formGroup]="dispositivo">
+        <div class="form-row">
+            <label for="nombredispositivo" class="col-2 col-form-label">Dispositivo</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="nombre" id="nombredispositivo" required="required" placeholder="Dispositivo">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="estadodispositivo" class="col-2 col-form-label">Estado</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="estado" id="estadodispositivo" required="required" placeholder="Estados separados por comas">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="accesoriosdispositivo" class="col-2 col-form-label">Accesorios</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="accesorios" id="accesoriosdispositivo" required="required" placeholder="Accesorios separados por comas">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="sndispositivo" class="col-2 col-form-label">Número de serie</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="sn" id="sndispositivo" required="required" placeholder="Numero de Serie">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="marcadispositivo" class="col-2 col-form-label">Marca</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="marca" id="marcadispositivo" required="required" placeholder="Marca">
+            </div>
+        </div>
+    </form>
+
+        <hr />
+
+        <h3>Cliente</h3>
+
+    <form *ngIf="reparacion" [formGroup]="cliente">
+        <div class="form-row">
+            <label for="nombrecliente" class="col-2 col-form-label">Nombre</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="nombre" id="nombrecliente" required="required" placeholder="Nombre">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="apellidoscliente" class="col-2 col-form-label">Apellidos</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="apellidos" id="apellidoscliente" required="required" placeholder="Apellidos">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="callecliente" class="col-2 col-form-label">Calle</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="calle" id="callecliente" required="required" placeholder="Calle">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="numerocliente" class="col-2 col-form-label">Número</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="numero" id="numerocliente" required="required" placeholder="Número de Serie">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="cpostalcliente" class="col-2 col-form-label">Código Postal</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="codigopostal" id="cpostalcliente" required="required" placeholder="Código Postal">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="ciudadcliente" class="col-2 col-form-label">Ciudad</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="ciudad" id="ciudadcliente" required="required" placeholder="Ciudad">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="telefonocliente" class="col-2 col-form-label">Teléfono</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="telefono" id="telefonocliente" required="required" placeholder="Teléfono">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="correocliente" class="col-2 col-form-label">Correo Electrónico</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="correo" id="correocliente" required="required" placeholder="Correo Electrónico">
+            </div>
+        </div>
+        
+    </form>
+
+        <button id="enviar" class="btn btn-success" type="submit" (click)="generarOrden()">Enviar</button>
+
+    
+</div>
+
+<div id="lostfocus" (click)="cerrar()">
+
+
