@@ -15,7 +15,7 @@ reparacionCtrl.getReparacion = async (req, res) => {
 reparacionCtrl.crearReparacion = async (req, res) => {          
     const reparacion = new Reparacion(req.body)
     await reparacion.save()
-    res.json({estado: 'guardado'})
+    res.json({_id: reparacion._id})
 }
 
 reparacionCtrl.editarReparacion = async (req, res) => {

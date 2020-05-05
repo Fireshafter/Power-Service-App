@@ -1,6 +1,6 @@
 import { Cliente } from './cliente';
 import { Dispositivo } from './dispositivo';
-import { Servicio } from './servicio';
+import { Costes } from './costes';
 import { Cambio } from './cambio';
 
 export class Reparacion {
@@ -14,7 +14,7 @@ export class Reparacion {
         public dispositivo: Dispositivo,
         public titulo: String,
         public descripcion: String,
-        public costes: Servicio[],
+        public costes: Costes[],
         public log: Cambio[],
         public _id?: Number
         

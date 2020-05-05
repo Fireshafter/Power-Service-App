@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { Reparacion } from '../clases/reparacion';
 import { Dispositivo } from '../clases/dispositivo';
 import { Cliente } from '../clases/cliente';
-import { Servicio } from '../clases/servicio';
 import { Cambio } from '../clases/cambio';
 
 @Component({
@@ -74,6 +73,7 @@ export class NuevaReparacionComponent implements OnInit {
 
     console.log(reparacion);
     this.crearReparacionEvent.emit(reparacion);
+    this.cerrar();
   }
 
   // generar(){

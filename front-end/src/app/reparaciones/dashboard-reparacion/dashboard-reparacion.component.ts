@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReparacionService } from '../reparacion.service';
 import { Reparacion } from '../clases/reparacion';
+import { identifierModuleUrl, analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-dashboard-reparacion',
@@ -32,8 +33,12 @@ export class DashboardReparacionComponent implements OnInit {
   }
 
   crear(reparacion: Reparacion){
+
     reparacion.orden = this.resguardos[this.resguardos.length - 1].orden + 1;
-    this._reparacionService.crear(reparacion).subscribe(() => console.log('Creado'));
+    this._reparacionService.crear(reparacion).subscribe(resultado =>{
+      let id:any = resultado;
+      this.verDetalle(id._id);
+    })
   }
 
   getDays(date: any){

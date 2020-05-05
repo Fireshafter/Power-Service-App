@@ -12,6 +12,7 @@ import { EditarReparacionComponent } from './reparaciones/editar-reparacion/edit
 import { DetalleReparacionComponent } from './reparaciones/detalle-reparacion/detalle-reparacion.component';
 import { ReparacionService } from './reparaciones/reparacion.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NuevaReparacionComponent,
     DashboardReparacionComponent,
     EditarReparacionComponent,
-    DetalleReparacionComponent
+    DetalleReparacionComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

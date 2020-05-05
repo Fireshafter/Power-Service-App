@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Reparacion } from '../clases/reparacion';
 import { Cliente } from '../clases/cliente';
 import { Dispositivo } from '../clases/dispositivo';
-import { Servicio } from '../clases/servicio';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReparacionService } from '../reparacion.service';
 

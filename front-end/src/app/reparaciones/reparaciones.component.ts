@@ -3,7 +3,7 @@ import { ReparacionService } from './reparacion.service';
 import { Reparacion } from './clases/reparacion';
 import { Cliente } from './clases/cliente';
 import { Dispositivo } from './clases/dispositivo';
-import { Servicio } from './clases/servicio';
+import { Costes } from './clases/costes';
 
 @Component({
   selector: 'app-reparaciones',
@@ -16,7 +16,7 @@ export class ReparacionesComponent implements OnInit {
   resguardos: Reparacion[];
 
   ngOnInit() {
-    this.getResguardos();
+    this.getResguardos();    
   }
 
   crearReparacion(reparacion: Reparacion){

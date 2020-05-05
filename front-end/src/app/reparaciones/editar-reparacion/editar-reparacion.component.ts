@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Reparacion } from '../clases/reparacion';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../clases/cliente';
@@ -12,10 +12,12 @@ import { Cambio } from '../clases/cambio';
   styleUrls: ['./editar-reparacion.component.scss']
 })
 export class EditarReparacionComponent implements OnInit {
+  
 
   dispositivo: FormGroup
   cliente: FormGroup
   ordenedit: FormGroup
+  coste: FormGroup
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -23,7 +25,9 @@ export class EditarReparacionComponent implements OnInit {
   @Input() orden: Reparacion;
   @Output() actualizacionEvent = new EventEmitter();
   @Output() cerrarVentanaEvent = new EventEmitter();
-  prueba = true;
+  costeindex: number;
+  costeoption: String;
+
 
   ngOnInit() {
     this.dispositivo = this._formBuilder.group({
@@ -51,6 +55,8 @@ export class EditarReparacionComponent implements OnInit {
       estado: [this.orden.estado, [Validators.required]],
       taller: [this.orden.taller, [Validators.required]]
     });
+
+    
   }
 
   generarDispositivo(){
@@ -103,20 +109,73 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.estado = orden.estado;
     reparacion.taller = orden.taller;
 
-    reparacion.log.push(new Cambio('Developer', 'Se ha editado la orden', new Date(Date.now())))
+    reparacion.log.push(new Cambio('Developer', 'Se ha editado la orden', new Date(Date.now())));
     reparacion.ultimaedicion = new Date(Date.now());
 
     this.actualizacionEvent.emit(reparacion);
 
-    console.log(this.ordenedit.value);
     this.cerrar();
   }
   
-  cerrar(){
-    this.cerrarVentanaEvent.emit()
+  editcoste(i: number){
+    this.coste = this._formBuilder.group({
+      servicio: [this.orden.costes[i].servicio, [Validators.required]],
+      coste: [this.orden.costes[i].coste, [Validators.required]],
+    });
+    this.costeindex = i;
+    this.costeoption = 'editar';
   }
 
-  jaja(){
-    alert('🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣🤣');
+  newcoste(){
+    this.coste = this._formBuilder.group({
+      servicio: [[''], [Validators.required]],
+      coste: [[''], [Validators.required]],
+    });
+
+    this.costeoption = 'nuevo';
+  }
+
+  deletecoste(i: number){
+    if(confirm('Estas seguro de que quieres eliminar este coste?')){
+      let reparacion = this.orden;
+      reparacion.costes.splice(i);
+      console.log(reparacion.costes);
+      
+      reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
+      reparacion.ultimaedicion = new Date(Date.now());
+
+      this.actualizacionEvent.emit(reparacion);
+      this.cerrar();
+    }
+  }
+
+  generarcoste(){
+    if(this.coste.invalid || isNaN(parseInt(this.coste.value.coste)))
+      return alert('Formulario inválido');
+    
+    let coste = this.coste.value;
+    coste.coste = coste.coste.replace(',','.');
+    let reparacion = this.orden;
+    
+    switch(this.costeoption){
+      case 'editar':
+        reparacion.costes[this.costeindex] = coste;
+        break;
+
+      case 'nuevo':
+        reparacion.costes.push(coste);
+        break;
+    }
+
+    reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
+    reparacion.ultimaedicion = new Date(Date.now());
+
+
+    this.actualizacionEvent.emit(reparacion);
+    this.cerrar();
+  }
+
+  cerrar(){
+    this.cerrarVentanaEvent.emit()
   }
 }

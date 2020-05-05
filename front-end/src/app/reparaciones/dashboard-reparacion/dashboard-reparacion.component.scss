@@ -1,11 +1,3 @@
-#centralWrapper{
-}
-
-#sideWrapper{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
 .orden{
     background-color: rgb(199, 199, 199);
     position: relative;
@@ -57,4 +49,9 @@
     position: absolute;
     bottom: 0px;
     right: 10px;
+}
+
+#centralWrapper{
+    margin: 20px;
+
 }
