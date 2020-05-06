@@ -15,6 +15,7 @@ app.use(cors({origin: 'http://localhost:4200'}))
 
 // Rutas
 app.use('/reparaciones',require('./rutas/reparacion.rutas'))
+app.use('/facturas', require('./rutas/factura.rutas'))
 
 // Arranque del servidor
 app.listen(app.get('puerto'), () => console.log(`Servidor abierto en http://localhost:${app.get('puerto')}`))

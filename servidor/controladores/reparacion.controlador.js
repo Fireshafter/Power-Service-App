@@ -25,7 +25,7 @@ reparacionCtrl.editarReparacion = async (req, res) => {
 
 reparacionCtrl.eliminarReparacion = async (req, res) => {  
     await Reparacion.findByIdAndRemove(req.params.id)
-    res.json({status: 'elimino una reparacion'})
+    res.json({status: 'reparacion eliminada'})
 }
 
 module.exports = reparacionCtrl

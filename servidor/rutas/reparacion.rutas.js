@@ -3,6 +3,7 @@ const router = express.Router()
 
 const reparacion = require('../controladores/reparacion.controlador')
 
+
 router.get('/', reparacion.getReparaciones)
 
 router.get('/:id', reparacion.getReparacion)
