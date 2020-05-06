@@ -29,9 +29,9 @@ export class ReparacionService {
     return this._http.get(`${this.URL}/reparaciones`);
   }
 
-  mostrar(reparacion: Reparacion){
-    return this._http.get(`${this.URL}/reparaciones/${reparacion._id}`);
-  }
+  // mostrar(reparacion: Reparacion){
+  //   return this._http.get(`${this.URL}/reparaciones/${reparacion._id}`);
+  // }
 
   verDetalle(id: Number){
     return this._http.get(`${this.URL}/reparaciones/${id}`);

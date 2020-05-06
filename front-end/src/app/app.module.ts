@@ -13,6 +13,7 @@ import { DetalleReparacionComponent } from './reparaciones/detalle-reparacion/de
 import { ReparacionService } from './reparaciones/reparacion.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
     DashboardReparacionComponent,
     EditarReparacionComponent,
     DetalleReparacionComponent,
-    NavbarComponent
+    NavbarComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,
