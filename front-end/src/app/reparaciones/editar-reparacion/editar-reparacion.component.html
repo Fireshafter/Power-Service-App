@@ -162,12 +162,23 @@
 
         <form *ngIf="coste" [formGroup]="coste">
 
-            <div class="form-row" id="costesform">
+            <hr class="mt-5" />
+
+            <div class="form-row" id="labelrow">
                 <div class="col-9">
-                    <input type="text" class="form-control" formControlName="servicio" id="tituloorden" required="required" placeholder="Servicio">
+                    <label for="nombreservicio">Servicio a ofrecer</label>
                 </div>
                 <div class="col-3">
-                    <input type="text" class="form-control" formControlName="coste" id="tituloorden" required="required" placeholder="Servicio">
+                    <label for="precioservicio">Precio del servicio</label>
+                </div>
+            </div>
+
+            <div class="form-row" id="costesform">
+                <div class="col-9">
+                    <input type="text" class="form-control" formControlName="servicio" id="nombreservicio" required="required" placeholder="Servicio">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" formControlName="coste" id="precioservicio" required="required" placeholder="Coste">
                 </div>
             </div>
             

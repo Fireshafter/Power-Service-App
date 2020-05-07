@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const cors = require('cors')
 const morgan = require('morgan')
+const path = require('path')
 
 const { mongoose } = require('./database')
 
@@ -16,6 +17,7 @@ app.use(cors({origin: 'http://localhost:4200'}))
 // Rutas
 app.use('/reparaciones',require('./rutas/reparacion.rutas'))
 app.use('/facturas', require('./rutas/factura.rutas'))
+app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // Arranque del servidor
 app.listen(app.get('puerto'), () => console.log(`Servidor abierto en http://localhost:${app.get('puerto')}`))

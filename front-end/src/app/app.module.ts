@@ -14,6 +14,7 @@ import { ReparacionService } from './reparaciones/reparacion.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { FacturasComponent } from './facturas/facturas.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FacturasComponent } from './facturas/facturas.component';
     EditarReparacionComponent,
     DetalleReparacionComponent,
     NavbarComponent,
-    FacturasComponent
+    FacturasComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { Reparacion } from '../clases/reparacion';
 import { Dispositivo } from '../clases/dispositivo';
@@ -15,6 +15,7 @@ export class NuevaReparacionComponent implements OnInit {
   reparacion: FormGroup;
   dispositivo: FormGroup;
   cliente: FormGroup;
+  step: number;
 
   @Output() crearReparacionEvent = new EventEmitter();
   @Output() cerrarVentanaEvent = new EventEmitter();
@@ -49,6 +50,8 @@ export class NuevaReparacionComponent implements OnInit {
       correo: ['', [Validators.required, Validators.email]]
     });
 
+    this.step = 0;
+
   }
 
   cerrar(){
@@ -76,16 +79,17 @@ export class NuevaReparacionComponent implements OnInit {
     this.cerrar();
   }
 
-  // generar(){
-  //   if(this.dispositivo.invalid)
-  //     return alert('Formulario invalido');
+  stepper(){
+    const formularios = [this.reparacion, this.dispositivo, this.cliente]
 
-  //   let dispositivo = this.dispositivo.value;
-  //   let reparacion:Reparacion = new Reparacion(Math.floor(Math.random() * 100), Math.floor(Math.random() * 100000), 'Pendiente de revisión', new Date(Date.now()), new Date(Date.now()), 'Power Service', new Cliente('Ruben', 'Cabrera Royo', 'Calle Rio Cenia', 6, 12005, 'Castellón', 'España', '644258066', 'fireshafter@hotmail.com'), new Dispositivo(dispositivo.nombre, dispositivo.marca, dispositivo.estado.replace(/\s/g, "").split(',')), 'datos.servicio', 'datos.descripcion', [new Servicio('Mano de obra estándar', 29)], [])
+    if(formularios[this.step].invalid)
+      return alert('Formulario inválido');
 
-  //   console.log(reparacion);
-  //   this.crearNuevaReparacionEvent.emit(reparacion)
-  //   this.dispositivo.reset();
-  // }
+    if(this.step < 2){
+      this.step++;
+    }
+    else
+      this.generarOrden();
+  }
 
 }

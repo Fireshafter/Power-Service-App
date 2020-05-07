@@ -23,7 +23,11 @@ export class DetalleReparacionComponent implements OnInit {
     this.reparacionid = this._route.snapshot.paramMap.get('id');
     this._reparacionService.verDetalle(this.reparacionid).subscribe(rep => {
       this.rep = <Reparacion>rep;
+
+      if(rep === null)
+        this._router.navigate(['/notfound']);
     });
+    
   }
 
   editar(target: String){
@@ -32,7 +36,13 @@ export class DetalleReparacionComponent implements OnInit {
   }
 
   eliminar(){
-    this.reparacionid =+1;
+    if(confirm('Estas seguro de que quieres eliminar PERMANENTEMENTE esta orden?')){
+
+      this._reparacionService.borrar(this.rep).subscribe(status => {
+        console.log(status);
+        this._router.navigate(['/reparaciones']);
+      })
+    }    
   }
 
   actualizar(reparacion: Reparacion){

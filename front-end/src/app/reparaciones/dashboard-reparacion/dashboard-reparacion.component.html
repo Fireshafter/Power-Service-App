@@ -1,22 +1,18 @@
-<div class="row">
-    <div class="col-9" id="centralWrapper">
-        
-        <div class="orden" *ngFor="let resguardo of resguardos" (click)="verDetalle(resguardo._id)">
-            <span class="norden">{{resguardo.orden}}</span>
-            <span class="cliente">{{resguardo.cliente.nombre}} {{resguardo.cliente.apellidos}}</span>
-            <div class="dispositivo">
-                <span class="disp">{{resguardo.dispositivo.nombre}}</span>
-                <span>{{resguardo.titulo}}</span>
+<div class="container-fluid mt-3 pl-3 pr-3">
+            <div class="orden" *ngFor="let resguardo of resguardos" (click)="verDetalle(resguardo._id)">
+                <span class="norden">{{resguardo.orden}}</span>
+                <span class="cliente">{{resguardo.cliente.nombre}} {{resguardo.cliente.apellidos}}</span>
+                <div class="dispositivo">
+                    <span class="disp">{{resguardo.dispositivo.nombre}}</span>
+                    <span>{{resguardo.titulo}}</span>
+                </div>
+                <span class="estado">{{resguardo.estado}}</span>
+                <span class="fecha">{{resguardo.fechacreacion | date:'short'}}</span>
+                <span class="dias" *ngIf="getDays(resguardo.fechacreacion) as delta">{{delta | number:'1.0-0'}} Dias</span>
             </div>
-            <span class="estado">{{resguardo.estado}}</span>
-            <span class="fecha">{{resguardo.fechacreacion | date:'short'}}</span>
-            <span class="dias" *ngIf="getDays(resguardo.fechacreacion) as delta">{{delta | number:'1.0-0'}} Dias</span>
-        </div>
-    </div>
-    
-    <div id="sideWrapper" class="col-2">
-        <button (click)="ventanaCrear=true" class="btn btn-info">Nuevo Resguardo</button>
-    </div>
 </div>
 
+
+<button class="btn btn-lg btn-primary float-right" id="botonNuevaOrden" (click)="ventanaCrear=true">Nueva Orden</button>
+<h3 class="text-light" id="tituloComponente">Reparaciones</h3>
 <app-nueva-reparacion *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()" (crearReparacionEvent)="crear($event)"></app-nueva-reparacion>

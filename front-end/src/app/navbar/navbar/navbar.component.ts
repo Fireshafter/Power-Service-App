@@ -10,10 +10,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(private _router: Router) { }
 
-  gotohome(){
-    this._router.navigate(['/reparaciones']);
-  }
-
   ngOnInit() {
   }
 

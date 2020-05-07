@@ -1,20 +1,21 @@
 <h3>Componente nueva reparación</h3>
 
 <div id="formularioDispositivo" class="center">
-    <form *ngIf="reparacion" [formGroup]="reparacion">
+    <form *ngIf="reparacion && step==0" [formGroup]="reparacion">
         <h3>Orden</h3>
+        <hr />
 
         <div class="form-row">
             <label for="nombredispositivo" class="col-2 col-form-label">Servicio</label>
             <div class="col-10">
-                <input type="text" class="form-control" formControlName="titulo" id="nombredispositivo" required="required" placeholder="Servicio">
+                <input autofocus="true" type="text" class="form-control" formControlName="titulo" id="nombredispositivo" required="required" placeholder="Servicio">
             </div>
         </div>
 
         <div class="form-row">
             <label for="descripcionorden" class="col-2 col-form-label">Descripción</label>
             <div class="col-10">
-                <input type="text" class="form-control" formControlName="descripcion" id="descripcionorden" required="required" placeholder="Descripción" />
+                <textarea class="form-control" formControlName="descripcion" id="descripcionorden" required="required" placeholder="Descripción" rows="4"></textarea>
             </div>
         </div>
         
@@ -39,13 +40,15 @@
             </div>
         </div>
 
+        <button id="enviar" class="btn btn-success" type="submit" (click)="stepper()">Siguiente</button>
     </form>
 
+    
+    
+    <form *ngIf="reparacion && step == 1" [formGroup]="dispositivo">
+        <h3>Dispositivo</h3>
         <hr />
 
-        <h3>Dispositivo</h3>
-    
-    <form *ngIf="reparacion" [formGroup]="dispositivo">
         <div class="form-row">
             <label for="nombredispositivo" class="col-2 col-form-label">Dispositivo</label>
             <div class="col-10">
@@ -80,13 +83,16 @@
                 <input type="text" class="form-control" formControlName="marca" id="marcadispositivo" required="required" placeholder="Marca">
             </div>
         </div>
+
+        <button id="enviar" class="btn btn-success" type="submit" (click)="stepper()">Siguiente</button>
     </form>
 
+    
+    
+    <form *ngIf="reparacion && step == 2" [formGroup]="cliente">
+        <h3>Cliente</h3>
         <hr />
 
-        <h3>Cliente</h3>
-
-    <form *ngIf="reparacion" [formGroup]="cliente">
         <div class="form-row">
             <label for="nombrecliente" class="col-2 col-form-label">Nombre</label>
             <div class="col-10">
@@ -143,9 +149,9 @@
             </div>
         </div>
         
+        <button id="enviar" class="btn btn-success" type="submit" (click)="stepper()">Enviar</button>
     </form>
-
-        <button id="enviar" class="btn btn-success" type="submit" (click)="generarOrden()">Enviar</button>
+    
 
     
 </div>
