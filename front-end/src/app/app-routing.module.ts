@@ -9,13 +9,13 @@ import {NotfoundComponent} from './notfound/notfound.component';
 
 
 const routes: Routes = [
-  //{path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'reparaciones', component: ReparacionesComponent},
   {path: 'reparaciones/editar', component: EditarReparacionComponent},
   {path: 'reparaciones/nueva', component: NuevaReparacionComponent},
   {path: 'reparaciones/detalles', component: DetalleReparacionComponent},
   {path: 'facturas', component: FacturasComponent},
-  {path: 'notfound', component: NotfoundComponent}
+  {path: 'notfound', component: NotfoundComponent},
+  {path: '**', redirectTo: 'notfound'}
 ];
 
 @NgModule({

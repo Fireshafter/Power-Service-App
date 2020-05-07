@@ -1,0 +1,74 @@
+@media (min-width: 1600px) {
+    
+    .facturaWrapper{
+        width: 20%;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    
+    .facturaWrapper{
+        width: 25%;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1300px) {
+    
+    .facturaWrapper{
+        width: 33.333333%;
+    }
+}
+
+@media (max-width: 900px) {
+    
+    .facturaWrapper{
+        width: 100%;
+    }
+}
+
+.facturaWrapper{
+    float: left;
+    padding: 10px;
+}
+
+
+.factura{
+    height: 120px;
+    border-radius: 7px;
+    position: relative;
+    background-color: rgb(70, 70, 70);
+}
+
+.factura img{
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.factura h3{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.fechafactura{
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    color: white;
+    font-style: italic;
+}
+
+.factura h2{
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    color: white;
+    font-style: italic;
+    font-weight: bolder;
+}

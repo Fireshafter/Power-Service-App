@@ -1,0 +1,13 @@
+
+<div *ngFor="let factura of facturas.reverse()" class="facturaWrapper">
+    <div class="factura">
+        <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" alt="">
+        <h3>{{factura.distribuidor}}</h3>
+        <div class="fechafactura">{{factura.fecha | date}}</div>
+        <h2>{{getTotal(factura) | currency: '':''}}€</h2>
+    </div>
+</div>
+
+<pre *ngFor="let factura of facturas">
+{{factura | json}}
+</pre>

@@ -1,4 +1,5 @@
 const Reparacion = require('../modelos/reparacion')
+const mongoose = require('mongoose')
 
 const reparacionCtrl = {};
 
@@ -8,8 +9,13 @@ reparacionCtrl.getReparaciones = async (req, res) => {
 }
 
 reparacionCtrl.getReparacion = async (req, res) => {  
-    const reparacion = await Reparacion.findById(req.params.id)
-    res.json(reparacion)
+    
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){  
+        const reparacion = await Reparacion.findById(req.params.id)
+        res.json(reparacion)
+    }
+    else
+        res.json({error: 'ObjectId no válido'})
 }
 
 reparacionCtrl.crearReparacion = async (req, res) => {          
