@@ -1,0 +1,67 @@
+#topWrapper{
+    position: relative;
+    height: 180px;
+}
+
+#topWrapper img{
+    height: 160px;
+    width: 160px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#topWrapper h1{
+    position: absolute;
+    top: 30px;
+    left: 200px;
+    font-weight: bolder;
+}
+
+#topWrapper h2{
+    position: absolute;
+    bottom: 50px;
+    left: 200px;
+    font-weight: bold;
+    color: rgb(80, 80, 80);
+}
+
+#topWrapper h3{
+    position: absolute;
+    top: 30px;
+    right: 80px;
+    font-style: italic;
+}
+
+#topWrapper h4{
+    position: absolute;
+    top: 70px;
+    right: 80px;
+    font-style: italic;
+}
+
+#topWrapper p{
+    position: absolute;
+    bottom: 20px;
+    left: 200px;
+}
+
+#bottomWrapper{
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#buttonWrapper{
+    position: fixed;
+    top: 13px;
+    right: 3px;
+    z-index: 10;
+}
+
+#buttonWrapper button{
+    margin-right: 13px;
+}
+
+#redbutton{
+    margin-left: 20px;
+}

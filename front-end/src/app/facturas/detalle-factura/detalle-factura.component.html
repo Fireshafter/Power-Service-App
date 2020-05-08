@@ -1,0 +1,38 @@
+<div id="topWrapper" *ngIf="fac">
+    <img src="http://localhost:3000/static/img/{{fac.distribuidor}}.jpg" alt="{{fac.distribuidor}}-logo" />
+    <h1>Factura Nº: {{fac.idfactura.toUpperCase()}}</h1>
+    <h2>{{fac.distribuidor}}</h2>
+    <h3>{{fac.fecha | date: 'dd/MM/yyyy'}}</h3>
+    <h4>{{getTotal() | currency:'':''}}€</h4>
+    <p>{{fac.comentario}}</p>
+</div>
+<div id="bottomWrapper">
+    <table class="table table-striped table-dark table-hover table-responsive-xl">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Precio Total</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="fac">
+          <tr *ngFor="let coste of fac.costes; let i = index">
+            <th scope="row" style="width: 5%;">{{i+1}}</th>
+            <td style="width: 30%;">{{coste.concepto}}</td>
+            <td style="width: 30%;">{{coste.categoria}}</td>
+            <td style="width: 10%;">{{coste.cantidad}}</td>
+            <td style="width: 10%;">{{coste.precio | currency:'':''}}€</td>
+            <td style="width: 15%;">{{coste.precio * coste.cantidad | currency:'':''}}€</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div id="buttonWrapper">
+    <button type="button" class="btn btn-warning boton" (click)="editarFactura()">Editar Factura</button>
+    <button type="button" class="btn btn-warning boton" (click)="editacCostes()">Editar Costes</button>
+    <button type="button" id="redbutton" class="btn btn-danger boton" (click)="eliminar()">Eliminar Factura</button>
+</div>

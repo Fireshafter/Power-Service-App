@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Factura } from '../clases/factura';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-factura',
@@ -8,13 +9,18 @@ import { Factura } from '../clases/factura';
 })
 export class DashboardFacturaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   @Input() facturas;
   cpfactura = this.facturas;
+  ventanaCrear: boolean = false;
 
   ngOnInit() {
     
+  }
+
+  verDetalle(id: number){
+    this._router.navigate(['facturas/detalles', {id: id}])
   }
 
   getTotal(factura: Factura):number{
@@ -27,7 +33,7 @@ export class DashboardFacturaComponent implements OnInit {
     return costetotal;
   }
 
-  prueba(){
-    return 'hola'
+  cerrarVentana(){
+    this.ventanaCrear = false;
   }
 }

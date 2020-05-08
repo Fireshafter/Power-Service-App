@@ -5,6 +5,7 @@ import { EditarReparacionComponent } from './reparaciones/editar-reparacion/edit
 import { NuevaReparacionComponent } from './reparaciones/nueva-reparacion/nueva-reparacion.component';
 import { DetalleReparacionComponent } from './reparaciones/detalle-reparacion/detalle-reparacion.component';
 import {FacturasComponent} from './facturas/facturas.component';
+import {DetalleFacturaComponent} from './facturas/detalle-factura/detalle-factura.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'reparaciones/nueva', component: NuevaReparacionComponent},
   {path: 'reparaciones/detalles', component: DetalleReparacionComponent},
   {path: 'facturas', component: FacturasComponent},
+  {path: 'facturas/detalles', component: DetalleFacturaComponent},
   {path: 'notfound', component: NotfoundComponent},
   {path: '**', redirectTo: 'notfound'}
 ];

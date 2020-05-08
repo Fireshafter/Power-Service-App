@@ -1,8 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { Reparacion } from '../clases/reparacion';
-import { Dispositivo } from '../clases/dispositivo';
-import { Cliente } from '../clases/cliente';
 import { Cambio } from '../clases/cambio';
 
 @Component({
@@ -59,9 +57,6 @@ export class NuevaReparacionComponent implements OnInit {
   }
 
   generarOrden(){
-    if(this.reparacion.invalid || this.dispositivo.invalid || this.cliente.invalid)
-      return alert('Formulario invalido')
-
     let orden = this.reparacion.value;
     let dispositivo = this.dispositivo.value;
     let cliente = this.cliente.value;

@@ -3,6 +3,7 @@ const { Schema } = mongoose
 
 const facturaSchema = new Schema({
     distribuidor: {type: String, required: true},
+    idfactura: {type: String, required: true},
     fecha: {type: Date, default: Date.now()},
     costes: {type: [
         {

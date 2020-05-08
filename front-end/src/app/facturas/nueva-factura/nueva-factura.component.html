@@ -1,0 +1,95 @@
+<p>nueva-factura works!</p>
+
+<div id="formularioFactura" >
+
+    <form *ngIf="factura && step==0" [formGroup]="factura">
+        <h3>Datos de la Factura</h3>
+        <hr />
+
+        <div class="form-row">
+            <label class="col-2 col-form-label">Identificador</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="idfactura" required="required" placeholder="Identificador único de la factura">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="distribuidor" class="col-2 col-form-label">Distribuidor</label>
+            <div class="col-10">
+                <select class="custom-select" formControlName="distribuidor" id="distribuidor" required="required" placeholder="Estado">
+                    <option value="esmovil.es">esmovil.es</option>
+                    <option value="muchorepuesto">muchorepuesto</option>
+                    <option value="EET">EET</option>
+                    <option value="E-nuc">E-nuc</option>
+                    <option value="Chipspain">Chipspain</option>
+                  </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Comentario</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="comentario" required="required" placeholder="Breve descripción sobre el pedido">
+            </div>
+        </div>
+
+        <button id="enviar" class="btn btn-success" type="submit" (click)="stepper()">Siguiente</button>
+    </form>
+
+    <div *ngIf="coste && step == 1">
+
+        <div class="container-fluid" id="costeswraper">
+            <div *ngFor="let coste of costes; let i = index" class="coste">[{{coste.categoria}}]<b>{{coste.concepto}}</b> x {{coste.cantidad}} - ({{coste.precio}}€)</div>
+        </div>
+
+        <form [formGroup]="coste">
+
+            <hr class="mt-5" />
+
+            <div class="form-row" id="labelrow">
+                <div class="col-6">
+                    <label>Concepto</label>
+                </div>
+                <div class="col-3">
+                    <label>Categoria</label>
+                </div>
+                <div class="col-1">
+                    <label>Cantidad</label>
+                </div>
+                <div class="col-2">
+                    <label>Precio unitario</label>
+                </div>
+            </div>
+
+            <div class="form-row" id="costesform">
+                <div class="col-6">
+                    <input type="text" class="form-control" formControlName="concepto" required="required" placeholder="Concepto">
+                </div>
+                <div class="col-3">
+                    <select class="custom-select" formControlName="categoria" required="required">
+                        <option value="Pantallas">Pantallas</option>
+                        <option value="Baterias">Baterias</option>
+                        <option value="Técnico en tienda">Técnico en tienda</option>
+                        <option value="Consumo interno">Consumo interno</option>
+                        <option value="Otros">Otros</option>
+                      </select>
+                </div>
+                <div class="col-1">
+                    <input type="text" class="form-control" formControlName="cantidad" required="required" placeholder="Cant.">
+                </div>
+                <div class="col-2">
+                    <input type="text" class="form-control" formControlName="precio" required="required" placeholder="Precio / Unidad">
+                </div>
+            </div>
+            
+
+            <button id="añadir" class="btn btn-primary" type="submit" (click)="generarCoste()">Añadir nuevo</button>
+        </form>
+        <button id="enviar" class="btn btn-success" type="submit" (click)="generarFactura()">Aceptar</button>
+    </div>
+
+</div>
+
+<div id="lostfocus" (click)="cerrar()">
+
+

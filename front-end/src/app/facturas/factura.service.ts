@@ -21,8 +21,8 @@ export class FacturaService {
     return this._http.put(`${this.URL}/facturas/${factura._id}`, factura);
   }
 
-  borrar(factura: Factura){
-    return this._http.delete(`${this.URL}/facturas/${factura._id}`);
+  borrar(_id: number){
+    return this._http.delete(`${this.URL}/facturas/${_id}`);
   }
 
   listar(){

@@ -15,7 +15,7 @@ facturaCtrl.getFactura = async (req, res) => {
 facturaCtrl.crearFactura = async (req, res) => {
     const factura = new Factura(req.body)
     await factura.save()
-    res.json({_id: factura._id})
+    res.json({id: factura._id})
 }
 
 facturaCtrl.editarFactura = async (req, res) => {

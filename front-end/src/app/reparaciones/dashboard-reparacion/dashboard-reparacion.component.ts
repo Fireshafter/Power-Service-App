@@ -23,8 +23,6 @@ export class DashboardReparacionComponent implements OnInit {
   }
 
   verDetalle(id: number){
-    console.log('atun');
-    
     this._router.navigate(['reparaciones/detalles', {id: id}])
   }
 

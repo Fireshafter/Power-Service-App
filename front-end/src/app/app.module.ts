@@ -16,6 +16,8 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardFacturaComponent } from './facturas/dashboard-factura/dashboard-factura.component';
+import { DetalleFacturaComponent } from './facturas/detalle-factura/detalle-factura.component';
+import { NuevaFacturaComponent } from './facturas/nueva-factura/nueva-factura.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { DashboardFacturaComponent } from './facturas/dashboard-factura/dashboar
     NavbarComponent,
     FacturasComponent,
     NotfoundComponent,
-    DashboardFacturaComponent
+    DashboardFacturaComponent,
+    DetalleFacturaComponent,
+    NuevaFacturaComponent
   ],
   imports: [
     BrowserModule,
