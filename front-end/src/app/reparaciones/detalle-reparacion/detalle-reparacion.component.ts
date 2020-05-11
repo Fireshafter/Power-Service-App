@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Reparacion } from '../clases/reparacion';
-import { Cliente } from '../clases/cliente';
-import { Dispositivo } from '../clases/dispositivo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReparacionService } from '../reparacion.service';
 
@@ -47,7 +45,6 @@ export class DetalleReparacionComponent implements OnInit {
 
   actualizar(reparacion: Reparacion){
     this._reparacionService.editar(reparacion).subscribe();
-    this.editable = false;
   }
 
   cerrarVentana(){

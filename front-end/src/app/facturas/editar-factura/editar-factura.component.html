@@ -1,0 +1,53 @@
+<p>editar-factura works! {{target}}</p>
+
+<div id="formularioFactura">
+
+    <form *ngIf="target == 'factura' && factura" [formGroup]="factura">
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Distribuidor</label>
+            <div class="col-10">
+                <select class="custom-select" formControlName="distribuidor">
+                    <option value="esmovil.es">esmovil.es</option>
+                    <option value="muchorepuesto">muchorepuesto</option>
+                    <option value="EET">EET</option>
+                    <option value="E-nuc">E-nuc</option>
+                    <option value="Chipspain">Chipspain</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Nº Factura</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="idfactura" required="required" placeholder="Identificador único de la factura">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Comentario</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="comentario" required="required" placeholder="Breve descripción sobre la factura">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Fecha</label>
+            <div class="col-10 position-relative">
+                <input type="text" readonly class="form-control" ngbDatepicker formControlName="fecha" #d="ngbDatepicker" [(ngModel)]="fecha"/>
+                <button id="toggleButton" class="btn btn-primary" (click)="d.toggle()"><svg class="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 0H2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M6.5 7a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm-9 3a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2zm3 0a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg></button>
+            </div>
+        </div>
+        
+        
+        <button id="enviar" class="btn btn-success" type="submit" (click)="generarFactura()">Enviar</button>
+    </form>
+
+</div>
+
+<div id="lostfocus" (click)="cerrar()">
+
+</div>
+
+
+

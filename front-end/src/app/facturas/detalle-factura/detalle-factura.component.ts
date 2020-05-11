@@ -14,6 +14,8 @@ export class DetalleFacturaComponent implements OnInit {
 
   facturaid: any;
   fac: Factura;
+  target: any;
+  edit: boolean = false;
 
   ngOnInit() {
     this.facturaid = this._route.snapshot.paramMap.get('id');
@@ -37,6 +39,18 @@ export class DetalleFacturaComponent implements OnInit {
     if(confirm('Estás seguro de que quieres borrar PERMANENTEMENTE esta factura?'))
     this._facturaService.borrar(this.facturaid).subscribe(res => {
       this._router.navigate(['/facturas']);
+    });
+  }
+
+  editar(target: any){
+    this.edit = true;
+    this.target = target;
+  }
+
+  actualizar(factura: Factura){
+    this.fac = factura;
+    this._facturaService.editar(factura).subscribe(res => {
+      console.log(res);
     });
   }
 

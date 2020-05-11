@@ -1,9 +1,6 @@
-<h3>Editar reparacion component</h3>
-<p>Target = {{target}}</p>
+<div id="formularioDispositivo">
 
-<div id="formularioDispositivo" class="center">
     <form *ngIf="target == 'dispositivo' && dispositivo" [formGroup]="dispositivo">
-
         
         <div class="form-row">
             <label for="nombredispositivo" class="col-2 col-form-label">Dispositivo</label>
@@ -45,7 +42,6 @@
     
     
     <form *ngIf="target == 'cliente' && cliente" [formGroup]="cliente">
-
         
         <div class="form-row">
             <label for="nombrecliente" class="col-2 col-form-label">Nombre</label>
@@ -107,10 +103,8 @@
     </form>
    
    
-   
     <form *ngIf="target == 'orden' && ordenedit" [formGroup]="ordenedit">
-
-        
+      
         <div class="form-row">
             <label for="tituloorden" class="col-2 col-form-label">Titulo</label>
             <div class="col-10">
@@ -183,9 +177,11 @@
             </div>
             
 
-            <button id="enviar" class="btn btn-success" type="submit" (click)="generarcoste()">Aceptar</button>
         </form>
-        <button id="cancelar" class="btn btn-primary" type="submit" (click)="newcoste()">Añadir nuevo</button>
+        <button id="enviar" class="btn btn-success" (click)="enviarCambios()">Aceptar</button>
+        <button *ngIf="costeoption == 'neutral'" id="cancelar" class="btn btn-primary" (click)="newcoste()">Nuevo coste</button>
+        <button *ngIf="costeoption == 'nuevo'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Añadir nuevo</button>
+        <button *ngIf="costeoption == 'editar'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Editar</button>
     </div>
 </div>
 

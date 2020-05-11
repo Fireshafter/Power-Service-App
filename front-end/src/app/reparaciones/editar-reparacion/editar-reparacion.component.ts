@@ -26,7 +26,7 @@ export class EditarReparacionComponent implements OnInit {
   @Output() actualizacionEvent = new EventEmitter();
   @Output() cerrarVentanaEvent = new EventEmitter();
   costeindex: number;
-  costeoption: String;
+  costeoption: String = 'neutral';
 
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.taller = orden.taller;
 
     reparacion.log.push(new Cambio('Developer', 'Se ha editado la orden', new Date(Date.now())));
-    reparacion.ultimaedicion = new Date(Date.now());
+    reparacion.ultimaedicion = new Date(Date.now()); 
 
     this.actualizacionEvent.emit(reparacion);
 
@@ -127,6 +127,7 @@ export class EditarReparacionComponent implements OnInit {
   }
 
   newcoste(){
+
     this.coste = this._formBuilder.group({
       servicio: [[''], [Validators.required]],
       coste: [[''], [Validators.required]],
@@ -138,14 +139,12 @@ export class EditarReparacionComponent implements OnInit {
   deletecoste(i: number){
     if(confirm('Estas seguro de que quieres eliminar este coste?')){
       let reparacion = this.orden;
-      reparacion.costes.splice(i);
-      console.log(reparacion.costes);
+      reparacion.costes.splice(i, 1);
+
+      console.log(reparacion);
       
-      reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
-      reparacion.ultimaedicion = new Date(Date.now());
 
       this.actualizacionEvent.emit(reparacion);
-      this.cerrar();
     }
   }
 
@@ -154,18 +153,26 @@ export class EditarReparacionComponent implements OnInit {
       return alert('Formulario inválido');
     
     let coste = this.coste.value;
-    coste.coste = coste.coste.replace(',','.');
+    if(coste.coste.toString().includes(','))
+      coste.coste = coste.coste.replace(',','.');
     let reparacion = this.orden;
     
-    switch(this.costeoption){
-      case 'editar':
-        reparacion.costes[this.costeindex] = coste;
-        break;
-
+    switch(this.costeoption){    
       case 'nuevo':
         reparacion.costes.push(coste);
         break;
-    }
+
+      case 'editar':
+        reparacion.costes[this.costeindex] = coste;
+        this.costeoption = 'nuevo'
+        break;
+      }
+      
+      this.coste.reset(); 
+  }
+
+  enviarCambios(){
+    let reparacion = this.orden;
 
     reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
     reparacion.ultimaedicion = new Date(Date.now());

@@ -32,7 +32,9 @@
 </div>
 
 <div id="buttonWrapper">
-    <button type="button" class="btn btn-warning boton" (click)="editarFactura()">Editar Factura</button>
-    <button type="button" class="btn btn-warning boton" (click)="editacCostes()">Editar Costes</button>
+    <button type="button" class="btn btn-warning boton" (click)="editar('factura')">Editar Factura</button>
+    <button type="button" class="btn btn-warning boton" (click)="editar('costes')">Editar Costes</button>
     <button type="button" id="redbutton" class="btn btn-danger boton" (click)="eliminar()">Eliminar Factura</button>
 </div>
+
+<app-editar-factura *ngIf="edit" [target]="target" [fac]="fac" (cerrarVentanaEvent)="edit = false" (actualizarFacturaEvent)="actualizar($event)"></app-editar-factura>
