@@ -21,6 +21,8 @@ export class EditarFacturaComponent implements OnInit {
 
   costes: Costes[];
   fecha: any
+  costeindex: number;
+  costeoption: String = 'neutral';
 
   constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService) { }
 
@@ -41,6 +43,75 @@ export class EditarFacturaComponent implements OnInit {
     });
 
     this.costes = this.fac.costes;
+  }
+
+  editcoste(i: number){
+    this.coste = this._formBuilder.group({
+      concepto: [this.fac.costes[i].concepto, [Validators.required]],
+      cantidad: [this.fac.costes[i].cantidad, [Validators.required]],
+      categoria: [this.fac.costes[i].categoria, [Validators.required]],
+      precio: [this.fac.costes[i].precio, [Validators.required]],
+    });
+    this.costeindex = i;
+    this.costeoption = 'editar';
+  }
+
+  newcoste(){
+
+    this.coste = this._formBuilder.group({
+      concepto: ['', [Validators.required]],
+      cantidad: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+      precio: ['', [Validators.required]],
+    });
+
+    this.costeoption = 'nuevo';
+  }
+
+  deletecoste(i: number){
+    if(confirm('Estas seguro de que quieres eliminar este coste?')){
+      let factura = this.fac;
+      factura.costes.splice(i, 1);
+
+      console.log(factura);
+      
+
+      this.actualizarFacturaEvent.emit(factura);
+    }
+  }
+
+  generarcoste(){
+    let numericseparators = [".", ","];
+    if(this.coste.invalid || isNaN(parseInt(this.coste.value.precio)) || isNaN(parseInt(this.coste.value.cantidad)) || numericseparators.some(el => this.coste.value.cantidad.toString().includes(el)) )
+      return alert('Formulario inválido');
+    
+    let coste = this.coste.value;
+    if(coste.precio.toString().includes(','))
+      coste.precio = coste.precio.replace(',','.');
+    let factura = this.fac;
+    
+    switch(this.costeoption){    
+      case 'nuevo':
+        factura.costes.push(coste);
+        break;
+
+      case 'editar':
+        factura.costes[this.costeindex] = coste;
+        this.costeoption = 'nuevo'
+        break;
+      }
+      
+      this.coste.reset(); 
+  }
+
+  enviarCambios(){
+    let factura = this.fac;
+
+    console.log(factura);
+    
+
+    this.actualizarFacturaEvent.emit(factura);
+    this.cerrar();
   }
   
   cerrar(){

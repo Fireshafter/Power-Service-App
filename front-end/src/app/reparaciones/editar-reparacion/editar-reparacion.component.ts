@@ -156,6 +156,9 @@ export class EditarReparacionComponent implements OnInit {
     if(coste.coste.toString().includes(','))
       coste.coste = coste.coste.replace(',','.');
     let reparacion = this.orden;
+
+    console.log(this.orden);
+
     
     switch(this.costeoption){    
       case 'nuevo':
@@ -175,8 +178,7 @@ export class EditarReparacionComponent implements OnInit {
     let reparacion = this.orden;
 
     reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
-    reparacion.ultimaedicion = new Date(Date.now());
-
+    reparacion.ultimaedicion = new Date(Date.now());    
 
     this.actualizacionEvent.emit(reparacion);
     this.cerrar();

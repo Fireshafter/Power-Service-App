@@ -126,7 +126,7 @@
             <table class="container-fluid info" [ngbCollapse]="costes">
                 <tr *ngFor="let coste of rep.costes">
                     <td>{{coste.servicio}}</td>
-                    <td>{{coste.coste | currency:' '}}€</td>
+                    <td>{{coste.coste | currency:'':''}}€</td>
                 </tr>
             </table>
         </div>

@@ -46,6 +46,8 @@
 .iconoscoste{
     float: right;
     margin-left: 10px;
+    z-index: 20;
+    position: relative;
 }
 
 .coste{
@@ -56,7 +58,29 @@
     color: white;
     border-radius: 5px;
     height: 48px;
+    position: relative;
 }
+
+.coste div{
+    position: absolute;
+    top: 12px;
+    width: 100%;
+}
+
+.precio{
+    position: absolute;
+    right: 230px;
+}
+
+.categoria{
+    position: absolute;
+    right: 300px;
+}
+
+.concepto{
+    font-weight: bold;
+}
+
 #costeswraper{
     margin-bottom: 30px;
 }
