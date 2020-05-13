@@ -1,5 +1,3 @@
-<p>nueva-factura works!</p>
-
 <div id="formularioFactura" >
 
     <form *ngIf="factura && step==0" [formGroup]="factura">
@@ -17,11 +15,7 @@
             <label for="distribuidor" class="col-2 col-form-label">Distribuidor</label>
             <div class="col-10">
                 <select class="custom-select" formControlName="distribuidor" id="distribuidor" required="required" placeholder="Estado">
-                    <option value="esmovil.es">esmovil.es</option>
-                    <option value="muchorepuesto">muchorepuesto</option>
-                    <option value="EET">EET</option>
-                    <option value="E-nuc">E-nuc</option>
-                    <option value="Chipspain">Chipspain</option>
+                    <option *ngFor="let distribuidor of distribuidores" value="{{distribuidor.nombre}}">{{distribuidor.nombre}}</option>
                 </select>
             </div>
         </div>
@@ -39,7 +33,9 @@
     <div *ngIf="coste && step == 1">
 
         <div class="container-fluid" id="costeswraper">
-            <div *ngFor="let coste of costes; let i = index" class="coste">[{{coste.categoria}}]<b>{{coste.concepto}}</b> x {{coste.cantidad}} - ({{coste.precio}}€)</div>
+            <div *ngFor="let coste of costes; let i = index" class="coste">
+                <div><span class="cantidad">({{coste.cantidad}}) </span><span class="concepto">{{coste.concepto}}</span><span class="categoria">[{{coste.categoria}}]</span><span class="precio">({{coste.precio | currency:'':''}}€)</span></div>
+            </div>
         </div>
 
         <form [formGroup]="coste">

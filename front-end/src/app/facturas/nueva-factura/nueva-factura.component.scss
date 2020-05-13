@@ -53,6 +53,27 @@ hr{
     color: white;
     border-radius: 5px;
     height: 48px;
+    position: relative;
+}
+
+.coste div{
+    position: absolute;
+    top: 12px;
+    width: 100%;
+}
+
+.precio{
+    position: absolute;
+    right: 30px;
+}
+
+.categoria{
+    position: absolute;
+    right: 300px;
+}
+
+.concepto{
+    font-weight: bold;
 }
 
 #costeswraper{

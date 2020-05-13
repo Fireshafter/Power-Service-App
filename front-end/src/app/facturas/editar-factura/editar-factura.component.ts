@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Factura } from '../clases/factura';
 import { Costes } from '../clases/costes';
 import { FacturaService } from '../factura.service';
+import { Distribuidor } from '../clases/distribuidor';
 
 @Component({
   selector: 'app-editar-factura',
@@ -23,6 +24,7 @@ export class EditarFacturaComponent implements OnInit {
   fecha: any
   costeindex: number;
   costeoption: String = 'neutral';
+  distribuidores: Distribuidor[];
 
   constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService) { }
 
@@ -43,6 +45,11 @@ export class EditarFacturaComponent implements OnInit {
     });
 
     this.costes = this.fac.costes;
+
+    this._facturaService.getDistribuidores()
+    .subscribe( res => {
+      this.distribuidores = <Distribuidor[]>res;
+    });
   }
 
   editcoste(i: number){

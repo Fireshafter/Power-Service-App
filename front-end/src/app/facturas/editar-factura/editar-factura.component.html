@@ -8,11 +8,7 @@
             <label class="col-2 col-form-label">Distribuidor</label>
             <div class="col-10">
                 <select class="custom-select" formControlName="distribuidor">
-                    <option value="esmovil.es">esmovil.es</option>
-                    <option value="muchorepuesto">muchorepuesto</option>
-                    <option value="EET">EET</option>
-                    <option value="E-nuc">E-nuc</option>
-                    <option value="Chipspain">Chipspain</option>
+                    <option *ngFor="let distribuidor of distribuidores" value="{{distribuidor.nombre}}">{{distribuidor.nombre}}</option>
                 </select>
             </div>
         </div>

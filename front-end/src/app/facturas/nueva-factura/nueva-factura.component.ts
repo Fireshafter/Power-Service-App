@@ -4,6 +4,7 @@ import { Costes } from '../clases/costes'
 import { Factura } from '../clases/factura';
 import { FacturaService } from '../factura.service';
 import { Router } from '@angular/router';
+import { Distribuidor } from '../clases/distribuidor';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class NuevaFacturaComponent implements OnInit {
   coste: FormGroup;
   costes: Costes[] = [];
   step: number;
+  distribuidores: Distribuidor[];
 
   @Output() cerrarVentanaEvent = new EventEmitter();
 
@@ -38,6 +40,11 @@ export class NuevaFacturaComponent implements OnInit {
     });
 
     this.step = 0;
+
+    this._facturaService.getDistribuidores()
+      .subscribe( res => {
+        this.distribuidores = <Distribuidor[]>res;
+      });
   }
 
   cerrar(){
