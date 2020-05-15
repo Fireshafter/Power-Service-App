@@ -59,7 +59,8 @@
 
             <div class="form-row" id="costesform">
                 <div class="col-6">
-                    <input type="text" class="form-control" formControlName="concepto" required="required" placeholder="Concepto">
+                    <!-- <input type="text" class="form-control" formControlName="concepto" required="required" placeholder="Concepto"> -->
+                    <input id="typeahead" type="text" class="form-control" (focusout)="checkCategoria()" formControlName="concepto" [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="formatter" />
                 </div>
                 <div class="col-3">
                     <select class="custom-select" formControlName="categoria" required="required">

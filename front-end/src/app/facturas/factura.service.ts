@@ -36,5 +36,8 @@ export class FacturaService {
   getDistribuidores(){
     return this._http.get(`${this.URL}/distribuidores`)
   }
-
+  
+  getComponentes(){
+    return this._http.get(`${this.URL}/componentes`)
+  }
 }

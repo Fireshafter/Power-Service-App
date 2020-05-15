@@ -13,7 +13,7 @@ import { DashboardReparacionComponent } from './reparaciones/dashboard-reparacio
 import { EditarReparacionComponent } from './reparaciones/editar-reparacion/editar-reparacion.component';
 import { DetalleReparacionComponent } from './reparaciones/detalle-reparacion/detalle-reparacion.component';
 import { ReparacionService } from './reparaciones/reparacion.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -45,7 +45,8 @@ registerLocaleData(localeEs, 'es');
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [
     ReparacionService,

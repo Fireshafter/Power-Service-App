@@ -5,6 +5,9 @@ import { Factura } from '../clases/factura';
 import { FacturaService } from '../factura.service';
 import { Router } from '@angular/router';
 import { Distribuidor } from '../clases/distribuidor';
+import { Componente } from '../clases/componente';
+import { Observable } from 'rxjs';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
 
 @Component({
@@ -19,8 +22,20 @@ export class NuevaFacturaComponent implements OnInit {
   costes: Costes[] = [];
   step: number;
   distribuidores: Distribuidor[];
+  componentes: Componente[];
+  componente: Componente = new Componente('', '');
 
   @Output() cerrarVentanaEvent = new EventEmitter();
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.componentes.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
+
+  formatter = (x: {nombre: string}) => x.nombre;
 
   constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _router: Router) { }
 
@@ -45,6 +60,12 @@ export class NuevaFacturaComponent implements OnInit {
       .subscribe( res => {
         this.distribuidores = <Distribuidor[]>res;
       });
+
+    this._facturaService.getComponentes()
+      .subscribe( res => {
+        this.componentes = <Componente[]>res;
+      });
+
   }
 
   cerrar(){
@@ -55,17 +76,22 @@ export class NuevaFacturaComponent implements OnInit {
     let fac = this.factura.value;
     let factura = new Factura(fac.distribuidor, fac.idfactura, this.costes, new Date(Date.now()), fac.comentario);
 
-    console.log(factura);
     this.crearFactura(factura);
   }
 
   generarCoste(){
 
     if(!this.coste.invalid && this.checkCoste(this.coste.value)){
-      let coste = this.coste.value;
+      let coste = this.coste.value;   
+
+      if(coste.concepto.nombre)
+        coste.concepto = coste.concepto.nombre
+      
       this.costes.push(coste);
       this.coste.reset();
     }
+    else
+      alert('Formulario inválido')
   }
 
   crearFactura(factura: Factura){
@@ -81,6 +107,8 @@ export class NuevaFacturaComponent implements OnInit {
     else if(this.step == 1)
       this.generarFactura();
     
+    else
+      alert('Formulario inválido')
   }
 
   checkCoste(coste){
@@ -88,6 +116,14 @@ export class NuevaFacturaComponent implements OnInit {
       return true;
     else
       return false;
+  }
+
+  checkCategoria(){
+    console.log(this.coste.value.concepto);    
+    
+    if(this.coste.value.concepto.nombre){
+      this.coste.controls['categoria'].setValue(this.coste.value.concepto.categoria)
+    }
   }
 
 }

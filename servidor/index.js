@@ -18,6 +18,7 @@ app.use(cors({origin: 'http://localhost:4200'}))
 app.use('/reparaciones',require('./rutas/reparacion.rutas'))
 app.use('/facturas', require('./rutas/factura.rutas'))
 app.use('/distribuidores', require('./rutas/distribuidor.rutas'))
+app.use('/componentes', require('./rutas/componente.rutas'))
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // Arranque del servidor
