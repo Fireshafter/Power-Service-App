@@ -4,6 +4,9 @@ import { Factura } from '../clases/factura';
 import { Costes } from '../clases/costes';
 import { FacturaService } from '../factura.service';
 import { Distribuidor } from '../clases/distribuidor';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Componente } from '../clases/componente';
 
 @Component({
   selector: 'app-editar-factura',
@@ -25,6 +28,19 @@ export class EditarFacturaComponent implements OnInit {
   costeindex: number;
   costeoption: String = 'neutral';
   distribuidores: Distribuidor[];
+  componentes: Componente[];
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this.componentes.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
+
+  formatter = (x: {nombre: string}) => x.nombre;
+
+  inputformatter = (x) => this.checkComponente(x);
 
   constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService) { }
 
@@ -49,6 +65,11 @@ export class EditarFacturaComponent implements OnInit {
     this._facturaService.getDistribuidores()
     .subscribe( res => {
       this.distribuidores = <Distribuidor[]>res;
+    });
+
+    this._facturaService.getComponentes()
+    .subscribe( res => {
+      this.componentes = <Componente[]>res;
     });
   }
 
@@ -95,6 +116,8 @@ export class EditarFacturaComponent implements OnInit {
     let coste = this.coste.value;
     if(coste.precio.toString().includes(','))
       coste.precio = coste.precio.replace(',','.');
+    if(coste.concepto.nombre)
+      coste.concepto = coste.concepto.nombre
     let factura = this.fac;
     
     switch(this.costeoption){    
@@ -135,6 +158,14 @@ export class EditarFacturaComponent implements OnInit {
     this.cerrar();  
   }
 
-
+checkComponente(componente){
+  if(componente.nombre){
+    this.coste.controls['categoria'].setValue(componente.categoria)
+    return componente.nombre
+  }
+  
+  else if(componente)
+    return componente
+}
 
 }

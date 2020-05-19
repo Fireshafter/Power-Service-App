@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Reparacion } from '../clases/reparacion';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cliente } from '../clases/cliente';
-import { Dispositivo } from '../clases/dispositivo';
-// import { Servicio } from '../clases/servicio';
 import { Cambio } from '../clases/cambio';
 
 @Component({

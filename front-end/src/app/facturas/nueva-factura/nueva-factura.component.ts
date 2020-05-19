@@ -31,11 +31,12 @@ export class NuevaFacturaComponent implements OnInit {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => term.length < 2 ? []
+      map(term => term.length < 1 ? []
         : this.componentes.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
 
   formatter = (x: {nombre: string}) => x.nombre;
+  inputformatter = (x: {nombre: string}) => x.nombre;
 
   constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _router: Router) { }
 
@@ -118,9 +119,7 @@ export class NuevaFacturaComponent implements OnInit {
       return false;
   }
 
-  checkCategoria(){
-    console.log(this.coste.value.concepto);    
-    
+  checkCategoria(){    
     if(this.coste.value.concepto.nombre){
       this.coste.controls['categoria'].setValue(this.coste.value.concepto.categoria)
     }

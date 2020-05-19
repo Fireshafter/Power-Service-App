@@ -70,10 +70,16 @@
 
             <div class="form-row" id="costesform">
                 <div class="col-6">
-                    <input type="text" class="form-control" formControlName="concepto" required="required" placeholder="Servicio">
+                    <input type="text" class="form-control" formControlName="concepto" [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="inputformatter" />
                 </div>
                 <div class="col-3">
-                    <input type="text" class="form-control" formControlName="categoria" required="required" placeholder="Categoría">
+                    <select class="custom-select" formControlName="categoria" required="required">
+                        <option value="Pantallas">Pantallas</option>
+                        <option value="Baterias">Baterias</option>
+                        <option value="Técnico en tienda">Técnico en tienda</option>
+                        <option value="Consumo interno">Consumo interno</option>
+                        <option value="Otros">Otros</option>
+                      </select>
                 </div>
                 <div class="col-1">
                     <input type="text" class="form-control" formControlName="cantidad" required="required" placeholder="Cant.">

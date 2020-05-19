@@ -1,11 +1,13 @@
 <div *ngIf="facturas">
     <div *ngFor="let factura of facturas.reverse()" class="facturaWrapper">
-        <div class="factura" (click)="verDetalle(factura._id)">
-            <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" alt="">
-            <h3>{{factura.distribuidor}}</h3>
-            <div class="fechafactura">{{factura.fecha | date: 'dd/MM/yyyy'}}</div>
-            <h2>{{getTotal(factura) | currency: '':''}}€</h2>
-        </div>
+        <a [routerLink]="['/facturas/detalles', {id: factura._id}]" style="outline: none;">
+            <div class="factura">
+                <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" alt="">
+                <h3>{{factura.distribuidor}}</h3>
+                <div class="fechafactura">{{factura.fecha | date: 'dd/MM/yyyy'}}</div>
+                <h2>{{getTotal(factura) | currency: '':''}}€</h2>
+            </div>
+        </a>
     </div>
 </div>
 

@@ -19,10 +19,6 @@ export class DashboardFacturaComponent implements OnInit {
     
   }
 
-  verDetalle(id: number){
-    this._router.navigate(['facturas/detalles', {id: id}])
-  }
-
   getTotal(factura: Factura):number{
     let costetotal = 0;
 
