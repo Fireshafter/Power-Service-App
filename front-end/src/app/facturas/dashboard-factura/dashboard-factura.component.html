@@ -1,5 +1,5 @@
-<div *ngIf="facturas">
-    <div *ngFor="let factura of facturas.reverse()" class="facturaWrapper">
+<div id="facturas" *ngIf="facturas">
+    <div *ngFor="let factura of facturas" class="facturaWrapper">
         <a [routerLink]="['/facturas/detalles', {id: factura._id}]" style="outline: none;">
             <div class="factura">
                 <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" alt="">
@@ -10,6 +10,13 @@
         </a>
     </div>
 </div>
-
+<div id="pagWrapper">
+    <div id="pagination">
+        <a class="pagebtn" (click)="changePag(-1)">&laquo;</a>
+        <a *ngFor="let page of visiblePages; index as i" (click)="gotopage(i)" [ngClass]="{'active': page-1 == selectedPage}">{{page}}</a>
+        <a class="pagebtn" (click)="changePag(1)">&raquo;</a>
+    </div>
+</div>
+    
 <button class="btn btn-lg btn-primary" id="botonNuevaFactura" (click)="ventanaCrear=true">Nueva Factura</button>
 <app-nueva-factura *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()"></app-nueva-factura>

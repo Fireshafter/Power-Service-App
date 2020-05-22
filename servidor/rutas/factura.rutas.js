@@ -6,6 +6,8 @@ const factura = require('../controladores/factura.controlador')
 
 router.get('/', factura.getFacturas)
 
+router.get('/size', factura.getFacturasCount)
+
 router.get('/:id', factura.getFactura)
 
 router.post('/', factura.crearFactura)

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Factura } from './clases/factura'
 
 @Injectable({
@@ -25,8 +25,8 @@ export class FacturaService {
     return this._http.delete(`${this.URL}/facturas/${_id}`);
   }
 
-  listar(){
-    return this._http.get(`${this.URL}/facturas`);
+  listar(paginfo: any){
+    return this._http.get(`${this.URL}/facturas`, {params: paginfo});
   }
 
   verDetalle(id: Number){
@@ -39,5 +39,9 @@ export class FacturaService {
   
   getComponentes(){
     return this._http.get(`${this.URL}/componentes`)
+  }
+
+  getSize(){
+    return this._http.get(`${this.URL}/facturas/size`)
   }
 }

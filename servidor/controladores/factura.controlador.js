@@ -3,7 +3,12 @@ const Factura = require('../modelos/factura')
 const facturaCtrl = {};
 
 facturaCtrl.getFacturas = async (req, res) => {
-    const facturas = await Factura.find()
+    const facturas = await Factura.find().sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+    res.json(facturas)
+}
+
+facturaCtrl.getFacturasCount = async (req, res) => {
+    const facturas = await Factura.count()
     res.json(facturas)
 }
 

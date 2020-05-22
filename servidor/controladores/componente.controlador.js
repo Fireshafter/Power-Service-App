@@ -13,4 +13,9 @@ componenteCtrl.crearComponente = async (req, res) => {
     res.json({id: componente._id})
 }
 
+componenteCtrl.getComponenteByName = async (req, res) => {
+    const componente = await Componente.findOne({nombre: req.body.nombre})
+    res.json(componente)
+}
+
 module.exports = componenteCtrl
