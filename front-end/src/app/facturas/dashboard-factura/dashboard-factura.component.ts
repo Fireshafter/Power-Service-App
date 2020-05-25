@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Factura } from '../clases/factura';
 import { Router } from '@angular/router';
 import { FacturaService } from '../factura.service';
+import { Distribuidor } from '../clases/distribuidor';
 
 @Component({
   selector: 'app-dashboard-factura',
@@ -13,37 +14,30 @@ export class DashboardFacturaComponent implements OnInit {
   constructor(private _router: Router, private _facturaService: FacturaService) { }
 
   facturas: Factura[];
+  distribuidores: Distribuidor[];
   cpfactura = this.facturas;
   ventanaCrear: boolean = false;
 
   visiblePages: number[] = [];
   selectedPage: number;
+  selectedDistribuidores: String[] = [];
+  selectedDistStr: String;
   maxPage: number
   size: any;
   pagsize: number = 30
 
   ngOnInit() {
-    this._facturaService.getSize().subscribe(res =>{
-      this.size = res
-      this.maxPage = Math.ceil(this.size / this.pagsize);
-      
+    this.getFacturasCount();
 
-      if(this.maxPage > 7)
-        this.visiblePages = [1, 2, 3, 4, 5, 6, 7];
-      else{
-        for(let i=0; i<this.maxPage; i++){
-          this.visiblePages.push(i+1);
-        }
-      }
-    })
-
-
-
-    console.log(this.size);
+    this._facturaService.getDistribuidores().subscribe(res =>{
+      this.distribuidores = <Distribuidor[]>res;
+      this.distribuidores.forEach(res => this.selectedDistribuidores.push(res.nombre))
+      this.arrayToString(this.selectedDistribuidores);
+    });
     
     this.selectedPage = 0;
 
-    this.getFacturas();
+      this.getFacturas();
   }
 
   getTotal(factura: Factura):number{
@@ -57,10 +51,29 @@ export class DashboardFacturaComponent implements OnInit {
   }
 
   getFacturas(){
-    this._facturaService.listar({pag: this.selectedPage, pagsize: this.pagsize}).subscribe(res => {
+    this._facturaService.listar({pag: this.selectedPage, pagsize: this.pagsize, distribuidores: this.selectedDistStr}).subscribe(res => {
       this.facturas = <Factura[]>res;
     })
     
+  }
+
+  getFacturasCount(){
+    this._facturaService.getSize({distribuidores: this.selectedDistStr}).subscribe(res =>{
+      this.size = res
+      this.maxPage = Math.ceil(this.size / this.pagsize);
+      
+
+      if(this.maxPage > 7)
+        this.visiblePages = [1, 2, 3, 4, 5, 6, 7];
+      else{
+        this.visiblePages = []
+        for(let i=0; i<this.maxPage; i++){
+          this.visiblePages.push(i+1);
+        }
+      }
+    });
+
+    this.selectedPage = 0;
   }
 
   cerrarVentana(){
@@ -87,4 +100,26 @@ export class DashboardFacturaComponent implements OnInit {
     this.getFacturas();
     console.log(this.selectedPage);
   }
+
+  toggleDistribuidor(nombre: String){
+    if(this.selectedDistribuidores.includes(nombre))
+      this.selectedDistribuidores.splice(this.selectedDistribuidores.lastIndexOf(nombre), 1);
+    else
+      this.selectedDistribuidores.push(nombre);
+
+    this.arrayToString(this.selectedDistribuidores)
+    this.getFacturas();
+    this.getFacturasCount();
+  }
+
+  arrayToString(array: String[]){
+    let string: String = '';
+
+    array.forEach(str => {
+      string = string + `${str},`
+    })
+
+    this.selectedDistStr = string.substring(0, string.length -1);
+  }
+
 }

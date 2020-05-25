@@ -3,13 +3,33 @@ const Factura = require('../modelos/factura')
 const facturaCtrl = {};
 
 facturaCtrl.getFacturas = async (req, res) => {
-    const facturas = await Factura.find().sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+    let distribuidoresStr = req.query.distribuidores
+    let facturas = null
+
+    if(distribuidoresStr != 'undefined'){
+        let distribuidores = distribuidoresStr.split(',')
+        facturas = await Factura.find({distribuidor: {$in: distribuidores}}).sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+    }
+    else{
+        facturas = await Factura.find().sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+    }
+
     res.json(facturas)
 }
 
 facturaCtrl.getFacturasCount = async (req, res) => {
-    const facturas = await Factura.count()
-    res.json(facturas)
+    const distribuidoresStr = req.query.distribuidores
+    let count
+
+    if(distribuidoresStr != 'undefined'){
+        const distribuidores = distribuidoresStr.split(',')
+        count = await Factura.countDocuments({distribuidor: {$in: distribuidores}})
+    }
+    else{
+        count = await Factura.countDocuments()
+    }
+
+    res.json(count)
 }
 
 facturaCtrl.getFactura = async (req, res) => {

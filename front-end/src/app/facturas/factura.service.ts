@@ -25,8 +25,8 @@ export class FacturaService {
     return this._http.delete(`${this.URL}/facturas/${_id}`);
   }
 
-  listar(paginfo: any){
-    return this._http.get(`${this.URL}/facturas`, {params: paginfo});
+  listar(params: any){
+    return this._http.get(`${this.URL}/facturas`, {params: params});
   }
 
   verDetalle(id: Number){
@@ -41,7 +41,7 @@ export class FacturaService {
     return this._http.get(`${this.URL}/componentes`)
   }
 
-  getSize(){
-    return this._http.get(`${this.URL}/facturas/size`)
+  getSize(params: any){
+    return this._http.get(`${this.URL}/facturas/size`, {params: params})
   }
 }

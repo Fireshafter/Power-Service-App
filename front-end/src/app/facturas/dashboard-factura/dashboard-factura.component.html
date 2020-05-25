@@ -2,7 +2,7 @@
     <div *ngFor="let factura of facturas" class="facturaWrapper">
         <a [routerLink]="['/facturas/detalles', {id: factura._id}]" style="outline: none;">
             <div class="factura">
-                <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" alt="">
+                <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" />
                 <h3>{{factura.distribuidor}}</h3>
                 <div class="fechafactura">{{factura.fecha | date: 'dd/MM/yyyy'}}</div>
                 <h2>{{getTotal(factura) | currency: '':''}}€</h2>
@@ -10,6 +10,7 @@
         </a>
     </div>
 </div>
+
 <div id="pagWrapper">
     <div id="pagination">
         <a class="pagebtn" (click)="changePag(-1)">&laquo;</a>
@@ -17,6 +18,12 @@
         <a class="pagebtn" (click)="changePag(1)">&raquo;</a>
     </div>
 </div>
-    
+
+<div id="distribuidorWrapper">
+    <button *ngFor="let distribuidor of distribuidores" (click)="toggleDistribuidor(distribuidor.nombre)" [ngClass]="selectedDistribuidores.includes(distribuidor.nombre) ? 'btn-primary' : 'btn-danger'" class="distribuidorButton btn btn-lg">
+        <img src="http://localhost:3000/static/img/{{distribuidor.nombre}}.jpg" />
+    </button>
+</div>
+
 <button class="btn btn-lg btn-primary" id="botonNuevaFactura" (click)="ventanaCrear=true">Nueva Factura</button>
 <app-nueva-factura *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()"></app-nueva-factura>
