@@ -42,49 +42,44 @@ export class DashboardFacturaComponent implements OnInit {
 
   getTotal(factura: Factura):number{
     let costetotal = 0;
-
+    
     factura.costes.forEach(coste => {
       costetotal += coste.precio * coste.cantidad
     });
-
+    
     return costetotal;
   }
-
+  
   getFacturas(){
     this._facturaService.listar({pag: this.selectedPage, pagsize: this.pagsize, distribuidores: this.selectedDistStr}).subscribe(res => {
       this.facturas = <Factura[]>res;
     })
-    
   }
-
+  
   getFacturasCount(){
     this._facturaService.getSize({distribuidores: this.selectedDistStr}).subscribe(res =>{
       this.size = res
       this.maxPage = Math.ceil(this.size / this.pagsize);
       
-
+      
       if(this.maxPage > 7)
-        this.visiblePages = [1, 2, 3, 4, 5, 6, 7];
+      this.visiblePages = [1, 2, 3, 4, 5, 6, 7];
       else{
         this.visiblePages = []
         for(let i=0; i<this.maxPage; i++){
           this.visiblePages.push(i+1);
         }
       }
+      this.gotopage(0);
     });
-
-    this.selectedPage = 0;
   }
 
   cerrarVentana(){
     this.ventanaCrear = false;
   }
 
-  gotopage(pag: number){
-    console.log(pag);
-    
+  gotopage(pag: number){    
     this.selectedPage = this.visiblePages[pag]-1;
-
     this.getFacturas();
   }
 
@@ -110,6 +105,10 @@ export class DashboardFacturaComponent implements OnInit {
     this.arrayToString(this.selectedDistribuidores)
     this.getFacturas();
     this.getFacturasCount();
+
+
+    console.log(this.selectedPage);
+    
   }
 
   arrayToString(array: String[]){

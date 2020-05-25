@@ -16,5 +16,4 @@
 
 
 <button class="btn btn-lg btn-primary" id="botonNuevaOrden" (click)="ventanaCrear=true">Nueva Orden</button>
-<h3 class="text-light" id="tituloComponente">Reparaciones</h3>
 <app-nueva-reparacion *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()" (crearReparacionEvent)="crear($event)"></app-nueva-reparacion>

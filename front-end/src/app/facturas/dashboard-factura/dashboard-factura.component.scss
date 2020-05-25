@@ -1,28 +1,28 @@
-@media (min-width: 1600px) {
+@media (min-width: 1850px) {
     
     .facturaWrapper{
         width: 20%;
     }
 }
 
-@media (min-width: 1300px) and (max-width: 1600px) {
+@media (min-width: 1500px) and (max-width: 1850px) {
     
     .facturaWrapper{
         width: 25%;
     }
 }
 
-@media (min-width: 900px) and (max-width: 1300px) {
+@media (min-width: 1100px) and (max-width: 1500px) {
     
     .facturaWrapper{
         width: 33.333333%;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     
     .facturaWrapper{
-        width: 100%;
+        width: 50%;
     }
 }
 
