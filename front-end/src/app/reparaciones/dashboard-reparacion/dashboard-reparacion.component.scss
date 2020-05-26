@@ -65,9 +65,55 @@
     padding-right: 100px;
 }
 
+#resguardosWrapper{
+    overflow: auto;
+}
+
 #botonNuevaOrden{
     position: fixed;
     top: 9px;
     right: 10px;
     z-index: 10;
+}
+
+#pagination {
+    display: inline-block;
+    padding-top: 10px;
+}
+  
+#pagination a {
+color: black;
+float: left;
+padding: 6px 16px;
+text-decoration: none;
+border: 1px solid #ddd;
+}
+
+#pagination a.active {
+background-color: rgb(66, 66, 66);
+color: white;
+border: 1px solid rgb(100, 100, 100);
+}
+
+#pagination a:hover:not(.active) {background-color: #ddd;}
+
+#pagination a:first-child {
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+#pagination a:last-child {
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+#pagWrapper{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.pagebtn{
+    user-select: none;
+    background-color: rgb(200, 200, 200);
 }

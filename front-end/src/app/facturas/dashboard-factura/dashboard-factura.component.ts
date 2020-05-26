@@ -18,13 +18,13 @@ export class DashboardFacturaComponent implements OnInit {
   cpfactura = this.facturas;
   ventanaCrear: boolean = false;
 
-  visiblePages: number[] = [];
-  selectedPage: number;
   selectedDistribuidores: String[] = [];
   selectedDistStr: String;
+  visiblePages: number[] = [];
+  selectedPage: number;
   maxPage: number
   size: any;
-  pagsize: number = 30
+  pagsize: number = 30;
 
   ngOnInit() {
     this.getFacturasCount();
@@ -37,7 +37,7 @@ export class DashboardFacturaComponent implements OnInit {
     
     this.selectedPage = 0;
 
-      this.getFacturas();
+    this.getFacturas();
   }
 
   getTotal(factura: Factura):number{

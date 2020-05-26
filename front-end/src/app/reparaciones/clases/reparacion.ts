@@ -5,7 +5,7 @@ import { Cambio } from './cambio';
 
 export class Reparacion {
     constructor(
-        public orden: Number,
+        public orden: number,
         public estado: String,
         public fechaentrada: Date,
         public ultimaedicion: Date,

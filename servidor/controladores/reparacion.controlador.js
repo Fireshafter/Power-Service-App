@@ -3,19 +3,35 @@ const mongoose = require('mongoose')
 
 const reparacionCtrl = {};
 
-reparacionCtrl.getReparaciones = async (req, res) => {  
-    const reparaciones = await Reparacion.find()
+reparacionCtrl.getReparaciones = async (req, res) => {
+    console.log(req.query)
+    const reparaciones = await Reparacion.find().sort({orden: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
     res.json(reparaciones)
 }
 
 reparacionCtrl.getReparacion = async (req, res) => {  
     
     if(mongoose.Types.ObjectId.isValid(req.params.id)){  
-        const reparacion = await Reparacion.findById(req.params.id)
+        const reparacion = await Reparacion.findById(req.params.id) 
         res.json(reparacion)
     }
     else
         res.json({error: 'ObjectId no válido'})
+}
+
+reparacionCtrl.getReparacionesCount = async (req, res) => {  
+    
+    const size = await Reparacion.countDocuments()
+    res.json(size)
+}
+
+reparacionCtrl.getLastReparacion = async (req, res) => {  
+    const lastReparacion = await Reparacion.find().sort({orden: -1}).limit(1)
+
+    if(lastReparacion[0])
+        res.json(lastReparacion)
+    else
+        res.json({error: 'No hay registros previos'})
 }
 
 reparacionCtrl.crearReparacion = async (req, res) => {          

@@ -61,7 +61,7 @@ export class NuevaReparacionComponent implements OnInit {
     let dispositivo = this.dispositivo.value;
     let cliente = this.cliente.value;
 
-    let reparacion = new Reparacion(34597, orden.estado, new Date(Date.now()), new Date(Date.now()), orden.taller, cliente, dispositivo, orden.titulo, orden.descripcion, [], [new Cambio('Developer', 'Creación de la orden', new Date(Date.now()))]);
+    let reparacion = new Reparacion(34000, orden.estado, new Date(Date.now()), new Date(Date.now()), orden.taller, cliente, dispositivo, orden.titulo, orden.descripcion, [], [new Cambio('Developer', 'Creación de la orden', new Date(Date.now()))]);
 
     let estado = dispositivo.estado + ''
     let accesorios = dispositivo.accesorios + ''
@@ -69,7 +69,6 @@ export class NuevaReparacionComponent implements OnInit {
     reparacion.dispositivo.estado = estado.split(',');
     reparacion.dispositivo.accesorios = accesorios.split(',');
 
-    console.log(reparacion);
     this.crearReparacionEvent.emit(reparacion);
     this.cerrar();
   }

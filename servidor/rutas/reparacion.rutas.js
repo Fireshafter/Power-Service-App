@@ -6,6 +6,10 @@ const reparacion = require('../controladores/reparacion.controlador')
 
 router.get('/', reparacion.getReparaciones)
 
+router.get('/last', reparacion.getLastReparacion)
+
+router.get('/size', reparacion.getReparacionesCount)
+
 router.get('/:id', reparacion.getReparacion)
 
 router.post('/', reparacion.crearReparacion)

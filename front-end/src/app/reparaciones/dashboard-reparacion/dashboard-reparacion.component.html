@@ -1,4 +1,4 @@
-<div class="container-fluid mt-3 pl-3 pr-3">
+<div class="container-fluid mt-3 pl-3 pr-3" id="resguardosWrapper">
     <a *ngFor="let resguardo of resguardos" [routerLink]="['/reparaciones/detalles', {id: resguardo._id}]" style="outline: none; color: inherit;">
         <div class="orden" >
             <span class="norden">{{resguardo.orden}}</span>
@@ -13,7 +13,13 @@
         </div>
     </a>
 </div>
-
+<div id="pagWrapper">
+    <div id="pagination">
+        <a class="pagebtn" (click)="changePag(-1)">&laquo;</a>
+        <a *ngFor="let page of visiblePages; index as i" (click)="gotopage(i)" [ngClass]="{'active': page-1 == selectedPage}">{{page}}</a>
+        <a class="pagebtn" (click)="changePag(1)">&raquo;</a>
+    </div>
+</div>
 
 <button class="btn btn-lg btn-primary" id="botonNuevaOrden" (click)="ventanaCrear=true">Nueva Orden</button>
 <app-nueva-reparacion *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentana()" (crearReparacionEvent)="crear($event)"></app-nueva-reparacion>

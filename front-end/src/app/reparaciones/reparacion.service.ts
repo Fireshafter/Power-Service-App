@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Reparacion } from './clases/reparacion';
 
 @Injectable({
@@ -25,13 +25,17 @@ export class ReparacionService {
     return this._http.delete(`${this.URL}/reparaciones/${reparacion._id}`);
   }
 
-  listar(){
-    return this._http.get(`${this.URL}/reparaciones`);
+  listar(params: any){
+    return this._http.get(`${this.URL}/reparaciones`, {params: params});
   }
 
-  // mostrar(reparacion: Reparacion){
-  //   return this._http.get(`${this.URL}/reparaciones/${reparacion._id}`);
-  // }
+  getSize(){
+    return this._http.get(`${this.URL}/reparaciones/size`);
+  }
+  
+  getLast(){
+    return this._http.get(`${this.URL}/reparaciones/last`);
+  }
 
   verDetalle(id: Number){
     return this._http.get(`${this.URL}/reparaciones/${id}`);
