@@ -3,6 +3,7 @@
     bottom: 100px;
     right: 80px;
     height: 25%;
+    user-select: none;
 }
 
 #bgimg{
@@ -10,6 +11,17 @@
     min-height: 1080px;
     position: fixed;
     bottom: 0px;
+}
+
+#comeback{
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    color: white;
+    font-size: 32pt;
+    font-weight: bolder;
+    text-shadow: 1px 1px grey;
+    outline: none;
 }
 
 hr{

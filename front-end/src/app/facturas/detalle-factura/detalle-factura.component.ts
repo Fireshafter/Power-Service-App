@@ -21,6 +21,12 @@ export class DetalleFacturaComponent implements OnInit {
     this.facturaid = this._route.snapshot.paramMap.get('id');
     this._facturaService.verDetalle(this.facturaid).subscribe(fac => {
       this.fac = <Factura>fac;
+
+      console.log(fac);
+      
+
+      if(fac === null || fac['error'])
+        this._router.navigate(['/notfound']);
     })
  
   }

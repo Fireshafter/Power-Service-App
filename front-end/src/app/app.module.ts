@@ -21,6 +21,7 @@ import { DashboardFacturaComponent } from './facturas/dashboard-factura/dashboar
 import { DetalleFacturaComponent } from './facturas/detalle-factura/detalle-factura.component';
 import { NuevaFacturaComponent } from './facturas/nueva-factura/nueva-factura.component';
 import { EditarFacturaComponent } from './facturas/editar-factura/editar-factura.component';
+import { StockComponent } from './stock/stock.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -39,6 +40,7 @@ registerLocaleData(localeEs, 'es');
     DetalleFacturaComponent,
     NuevaFacturaComponent,
     EditarFacturaComponent,
+    StockComponent,
   ],
   imports: [
     BrowserModule,

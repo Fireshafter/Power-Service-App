@@ -29,8 +29,12 @@ export class ReparacionService {
     return this._http.get(`${this.URL}/reparaciones`, {params: params});
   }
 
-  getSize(){
-    return this._http.get(`${this.URL}/reparaciones/size`);
+  getSize(params: any){
+    return this._http.get(`${this.URL}/reparaciones/size`, {params: params});
+  }
+
+  search(params: any){
+    return this._http.get(`${this.URL}/reparaciones/search`, {params: params});
   }
   
   getLast(){

@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReparacionService } from '../reparacion.service';
 import { Reparacion } from '../clases/reparacion';
-import { identifierModuleUrl, analyzeAndValidateNgModules } from '@angular/compiler';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard-reparacion',
@@ -21,12 +22,17 @@ export class DashboardReparacionComponent implements OnInit {
   size: any;
   pagsize: number = 24;
 
+  cerradas: boolean = false;
+  searchTerm: String;
+  searchVisible = false;
+  cosas: any[];
+
+
   constructor(private _router: Router, private _reparacionService: ReparacionService) { }
 
   ngOnInit() {
     this.getResguardosCount();
     this.selectedPage = 0;
-    this.getResguardos();
     this.ahora = new Date(Date.now());
   }
 
@@ -61,7 +67,7 @@ export class DashboardReparacionComponent implements OnInit {
   }
 
   getResguardos() {
-    this._reparacionService.listar({pag: this.selectedPage, pagsize: this.pagsize})
+    this._reparacionService.listar({pag: this.selectedPage, pagsize: this.pagsize, cerradas: this.cerradas})
       .subscribe(res => {
         this.resguardos = <Reparacion[]>res;
       })
@@ -70,6 +76,11 @@ export class DashboardReparacionComponent implements OnInit {
   gotopage(pag: number){    
     this.selectedPage = this.visiblePages[pag]-1;
     this.getResguardos();
+  }
+
+  toggleCerradas(){
+    this.cerradas = !this.cerradas;
+    this.getResguardosCount();
   }
 
   changePag(pagechange: number){
@@ -86,7 +97,7 @@ export class DashboardReparacionComponent implements OnInit {
   }
 
   getResguardosCount(){
-    this._reparacionService.getSize().subscribe(res =>{
+    this._reparacionService.getSize({cerradas: this.cerradas}).subscribe(res =>{
       this.size = res
       this.maxPage = Math.ceil(this.size / this.pagsize);
       
@@ -103,4 +114,11 @@ export class DashboardReparacionComponent implements OnInit {
     });
   }
 
+  buscar(){
+    this.searchVisible = true;
+    this._reparacionService.search({searchTerm: this.searchTerm, pagsize: 10}).subscribe(res =>{
+      this.cosas = <any[]>res;
+    })
+    
+  }
 }

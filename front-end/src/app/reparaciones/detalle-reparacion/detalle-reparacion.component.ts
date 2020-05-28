@@ -22,7 +22,7 @@ export class DetalleReparacionComponent implements OnInit {
     this._reparacionService.verDetalle(this.reparacionid).subscribe(rep => {
       this.rep = <Reparacion>rep;
 
-      if(rep === null)
+      if(rep === null || rep['error'])
         this._router.navigate(['/notfound']);
     });
     

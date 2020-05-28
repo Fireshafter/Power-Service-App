@@ -10,6 +10,8 @@ router.get('/last', reparacion.getLastReparacion)
 
 router.get('/size', reparacion.getReparacionesCount)
 
+router.get('/search', reparacion.reparacionSearch)
+
 router.get('/:id', reparacion.getReparacion)
 
 router.post('/', reparacion.crearReparacion)

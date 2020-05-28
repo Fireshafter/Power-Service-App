@@ -1,4 +1,5 @@
 const Factura = require('../modelos/factura')
+const mongoose = require('mongoose')
 
 const facturaCtrl = {};
 
@@ -33,8 +34,14 @@ facturaCtrl.getFacturasCount = async (req, res) => {
 }
 
 facturaCtrl.getFactura = async (req, res) => {
-    const factura = await Factura.findById(req.params.id)
-    res.json(factura)
+
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){
+        const factura = await Factura.findById(req.params.id)
+        res.json(factura)
+    }
+    else{
+        res.json({error: 'ObjectId no válido'})
+    }
 }
 
 facturaCtrl.crearFactura = async (req, res) => {
