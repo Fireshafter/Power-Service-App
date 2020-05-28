@@ -1,0 +1,129 @@
+@media (min-width: 1710px) {
+    
+    .categoriaWrapper{
+        width: 25%;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1710px) {
+    
+    .categoriaWrapper{
+        width: 50%;
+    }
+}
+
+@media (max-width: 900px) {
+    
+    .categoriaWrapper{
+        width: 100%;
+    }
+}
+
+@media (max-width: 1100px) {
+    
+    #marcaWrapper{
+        display: none;
+    }
+}
+
+.categoriaWrapper{
+    height: 820px;
+    padding: 0px 10px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.categoria{
+    background-color: #464646;
+    height: 100%;
+    border-radius: 6px;
+    position: relative;
+}
+
+.categoria h2{
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    font-weight: bolder;
+}
+
+.componenteWrapper{
+    background-color: #c7c7c7;
+    height: 740px;
+    margin: 0px 15px;
+    margin-top: 15px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.innerComponenteWrapper{
+    height: 100%;
+    overflow: auto;
+}
+
+.componente{
+    background-color: white;
+    margin: 10px 10px;
+    height: 60px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.componenteNombre{
+    width: 100%;
+    font-weight: bold;
+}
+
+.componenteStock{
+    position: absolute;
+    right: 10px;
+}
+
+.componenteMarca{
+    color: #444444;
+}
+
+#contentWrapper{
+    margin-top: 8px;
+    background-color: grey;
+    min-width: 450px;
+}
+
+#opcionesWrapper{
+    position: fixed;
+    z-index: 10;
+    top: 9px;
+    right: 240px;
+}
+
+#opcionesWrapper input{
+    margin-top: 5px;
+}
+
+#botonNuevoComponente{
+    position: fixed;
+    top: 9px;
+    right: 10px;
+    z-index: 10;
+}
+
+#searchBar{
+    float: right;
+    margin-left: 20px;
+}
+
+#marcaWrapper{
+    float: left;
+    z-index: 10;
+}
+
+.marcaButton{
+    padding: 3px;
+    margin-left: 10px;
+}
+
+.marcaButton img{
+    width: 40px;
+    height: 40px;
+}

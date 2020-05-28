@@ -1,0 +1,78 @@
+<div id="contentWrapper" class="container-fluid">
+        <div *ngIf="pantallas" class="categoriaWrapper">
+            <div class="categoria">
+                <h2>Pantallas</h2>
+                <div class="componenteWrapper">
+                    <div class="innerComponenteWrapper">
+                        <div *ngFor="let componente of pantallas" class="componente">
+                            <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
+                            <div class="componenteStock">{{componente.stock}} unidades.</div>
+                            <div class="componenteMarca">{{componente.marca}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="baterias" class="categoriaWrapper">
+            <div class="categoria">
+                <h2>Baterias</h2>
+                <div class="componenteWrapper">
+                    <div class="innerComponenteWrapper">
+                        <div *ngFor="let componente of baterias" class="componente">
+                            <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
+                            <div class="componenteStock">{{componente.stock}} unidades.</div>
+                            <div class="componenteMarca">{{componente.marca}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="tecnicoentienda" class="categoriaWrapper">
+            <div class="categoria">
+                <h2>Técnico en tienda</h2>
+                <div class="componenteWrapper">
+                    <div class="innerComponenteWrapper">
+                        <div *ngFor="let componente of tecnicoentienda" class="componente">
+                            <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
+                            <div class="componenteStock">{{componente.stock}} unidades.</div>
+                            <div class="componenteMarca">{{componente.marca}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="consumointerno" class="categoriaWrapper">
+            <div class="categoria">
+                <h2>Consumo interno</h2>
+                <div class="componenteWrapper">
+                    <div class="innerComponenteWrapper">
+                        <div *ngFor="let componente of consumointerno" class="componente">
+                            <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
+                            <div class="componenteStock">{{componente.stock}} unidades.</div>
+                            <div class="componenteMarca">{{componente.marca}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<div id="opcionesWrapper">
+    <div id="searchBar">
+        <input class="form-control" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="getComponentes()" >
+    </div>
+
+    <div id="marcaWrapper" *ngIf="marcas && selectedMarcas">
+        <button *ngFor="let marca of marcas" title="{{marca}}" class="btn marcaButton" (click)="toggleMarca(marca)" [ngClass]="selectedMarcas.includes(marca) ? 'btn-primary' : 'btn-danger'" title="marca">
+            <img src="http://localhost:3000/static/img/{{marca}}.jpg" />
+        </button>
+    </div>
+</div>
+
+<button class="btn btn-lg btn-primary" id="botonNuevoComponente" (click)="ventanaCrear=true">Nuevo Componente</button>
+
+

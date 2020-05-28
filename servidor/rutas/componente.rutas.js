@@ -8,6 +8,10 @@ router.get('/', componente.getComponentes)
 
 router.get('/byname', componente.getComponenteByName)
 
+router.get('/marcas', componente.getMarcas)
+
 router.post('/', componente.crearComponente)
+
+router.delete('/:id', componente.eliminarComponente)
 
 module.exports = router

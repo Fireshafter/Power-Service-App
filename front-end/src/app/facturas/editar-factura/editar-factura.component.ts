@@ -6,7 +6,7 @@ import { FacturaService } from '../factura.service';
 import { Distribuidor } from '../clases/distribuidor';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Componente } from '../clases/componente';
+import { Componente } from '../../stock/clases/componente';
 
 @Component({
   selector: 'app-editar-factura',
@@ -67,7 +67,7 @@ export class EditarFacturaComponent implements OnInit {
       this.distribuidores = <Distribuidor[]>res;
     });
 
-    this._facturaService.getComponentes()
+    this._facturaService.getComponentes({categoria: 'vendible'})
     .subscribe( res => {
       this.componentes = <Componente[]>res;
     });

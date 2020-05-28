@@ -5,7 +5,7 @@ import { Factura } from '../clases/factura';
 import { FacturaService } from '../factura.service';
 import { Router } from '@angular/router';
 import { Distribuidor } from '../clases/distribuidor';
-import { Componente } from '../clases/componente';
+import { Componente } from '../../stock/clases/componente';
 import { Observable } from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ export class NuevaFacturaComponent implements OnInit {
   step: number;
   distribuidores: Distribuidor[];
   componentes: Componente[];
-  componente: Componente = new Componente('', '');
+  componente: Componente = new Componente('', '', '', 0);
 
   @Output() cerrarVentanaEvent = new EventEmitter();
 
@@ -62,7 +62,7 @@ export class NuevaFacturaComponent implements OnInit {
         this.distribuidores = <Distribuidor[]>res;
       });
 
-    this._facturaService.getComponentes()
+    this._facturaService.getComponentes({categoria: 'vendible'})
       .subscribe( res => {
         this.componentes = <Componente[]>res;
       });

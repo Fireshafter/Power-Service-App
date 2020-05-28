@@ -155,11 +155,15 @@ border-bottom-right-radius: 5px;
 }
 
 .resultnombre{
-    margin-left: 20px;
+    background-color: yellow;
+    max-width: 200px;
 }
 
 .resultorden{
     font-weight: bold;
+    float: left;
+    overflow: auto;
+    margin-right: 15px;
 }
 
 #clickOut{

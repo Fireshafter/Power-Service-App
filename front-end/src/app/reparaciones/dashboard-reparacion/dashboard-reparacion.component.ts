@@ -25,7 +25,7 @@ export class DashboardReparacionComponent implements OnInit {
   cerradas: boolean = false;
   searchTerm: String;
   searchVisible = false;
-  cosas: any[];
+  searchResults: any[];
 
 
   constructor(private _router: Router, private _reparacionService: ReparacionService) { }
@@ -117,7 +117,7 @@ export class DashboardReparacionComponent implements OnInit {
   buscar(){
     this.searchVisible = true;
     this._reparacionService.search({searchTerm: this.searchTerm, pagsize: 10}).subscribe(res =>{
-      this.cosas = <any[]>res;
+      this.searchResults = <any[]>res;
     })
     
   }
