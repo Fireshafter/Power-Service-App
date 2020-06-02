@@ -32,8 +32,14 @@ componenteCtrl.getComponentes = async (req, res) => {
 
 componenteCtrl.crearComponente = async (req, res) => {
     const componente = new Componente(req.body)
+    
     await componente.save()
     res.json({id: componente._id})
+}
+
+componenteCtrl.editarComponente = async (req, res) => {
+    await Componente.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: false})
+    res.json({estado: 'editado'})
 }
 
 componenteCtrl.getMarcas = async (req, res) => {

@@ -13,7 +13,7 @@ export class StockService {
     private _http:HttpClient
   ) { }
 
-  crear(componente: Componente){
+  crear(componente: Componente){  
     return this._http.post(`${this.URL}/componentes`, componente);
   }
   

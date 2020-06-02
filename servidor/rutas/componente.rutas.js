@@ -10,6 +10,8 @@ router.get('/byname', componente.getComponenteByName)
 
 router.get('/marcas', componente.getMarcas)
 
+router.put('/:id', componente.editarComponente)
+
 router.post('/', componente.crearComponente)
 
 router.delete('/:id', componente.eliminarComponente)

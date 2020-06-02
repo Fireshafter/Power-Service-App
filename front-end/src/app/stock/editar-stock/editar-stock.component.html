@@ -1,0 +1,46 @@
+<div id="formularioStock" >
+
+    <form *ngIf="stock" [formGroup]="stock">
+        <h3>Datos del componente</h3>
+        <hr />
+
+        <div class="form-row">
+            <label class="col-2 col-form-label">Nombre</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="nombre" required="required" placeholder="Nombre del componente">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Marca</label>
+            <div class="col-10">
+                <input type="text" class="form-control" formControlName="marca" [ngbTypeahead]="marcasSearch" required="required" placeholder="Fabricante del componente">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label class="col-2 col-form-label">Categoria</label>
+            <div class="col-10">
+                <select class="custom-select" formControlName="categoria" required="required">
+                    <option value="Pantallas">Pantallas</option>
+                    <option value="Baterias">Baterias</option>
+                    <option value="Técnico en tienda">Técnico en tienda</option>
+                    <option value="Consumo interno">Consumo interno</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="col-2 col-form-label">Stock</label>
+            <div class="col-10">
+                <input type="number" min="0" max="9999" class="form-control" formControlName="stock" required="required" placeholder="Cantidad en stock inicial">
+            </div>
+        </div>
+
+        <button id="enviar" class="btn btn-success" type="submit" (click)="editarComponente()">Editar</button>
+    </form>
+
+</div>
+
+<div id="lostfocus" (click)="cerrar()">

@@ -23,6 +23,8 @@ import { NuevaFacturaComponent } from './facturas/nueva-factura/nueva-factura.co
 import { EditarFacturaComponent } from './facturas/editar-factura/editar-factura.component';
 import { StockComponent } from './stock/stock.component';
 import { DashboardStockComponent } from './stock/dashboard-stock/dashboard-stock.component';
+import { NuevoStockComponent } from './stock/nuevo-stock/nuevo-stock.component';
+import { EditarStockComponent } from './stock/editar-stock/editar-stock.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -43,6 +45,8 @@ registerLocaleData(localeEs, 'es');
     EditarFacturaComponent,
     StockComponent,
     DashboardStockComponent,
+    NuevoStockComponent,
+    EditarStockComponent,
   ],
   imports: [
     BrowserModule,

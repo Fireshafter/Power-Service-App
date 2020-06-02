@@ -19,6 +19,9 @@ export class DashboardStockComponent implements OnInit {
   selectedMarcas: String[];
   selectedMarcasStr: String;
   searchTerm: String;
+  ventanaCrear: boolean = false;
+  ventanaEditar: boolean = false;
+  editTarget: Componente;
 
   ngOnInit() {
     this.getComponentes();
@@ -61,7 +64,20 @@ export class DashboardStockComponent implements OnInit {
     })
 
     this.selectedMarcasStr = string.substring(0, string.length -1);
-    console.log(this.selectedMarcasStr);
-    
+  }
+
+  editarComponente(componente: Componente){
+    this.editTarget = componente;
+    this.ventanaEditar = true;
+  }
+
+  cerrarVentanaCrear(){
+    this.ventanaCrear = false;
+    this.getComponentes();
+  }
+
+  cerrarVentanaEditar(){
+    this.ventanaEditar = false;
+    this.getComponentes();
   }
 }

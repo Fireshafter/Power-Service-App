@@ -26,6 +26,23 @@
     }
 }
 
+@media (max-width: 800px) {
+    
+    #searchBar{
+        display: none;
+    }
+}
+
+@media (max-width: 715px) {
+    
+    #botonNuevoComponente{
+        left: 480px;
+        height: 48px;
+        width: 211px;
+        white-space: nowrap;
+    }
+}
+
 .categoriaWrapper{
     height: 820px;
     padding: 0px 10px;
@@ -86,8 +103,8 @@
 
 #contentWrapper{
     margin-top: 8px;
-    background-color: grey;
-    min-width: 450px;
+    min-width: 715px;
+    overflow: auto;
 }
 
 #opcionesWrapper{

@@ -4,7 +4,7 @@
                 <h2>Pantallas</h2>
                 <div class="componenteWrapper">
                     <div class="innerComponenteWrapper">
-                        <div *ngFor="let componente of pantallas" class="componente">
+                        <div *ngFor="let componente of pantallas" class="componente" (click)="editarComponente(componente)">
                             <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
                             <div class="componenteStock">{{componente.stock}} unidades.</div>
                             <div class="componenteMarca">{{componente.marca}}</div>
@@ -19,7 +19,7 @@
                 <h2>Baterias</h2>
                 <div class="componenteWrapper">
                     <div class="innerComponenteWrapper">
-                        <div *ngFor="let componente of baterias" class="componente">
+                        <div *ngFor="let componente of baterias" class="componente" (click)="editarComponente(componente)">
                             <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
                             <div class="componenteStock">{{componente.stock}} unidades.</div>
                             <div class="componenteMarca">{{componente.marca}}</div>
@@ -34,7 +34,7 @@
                 <h2>Técnico en tienda</h2>
                 <div class="componenteWrapper">
                     <div class="innerComponenteWrapper">
-                        <div *ngFor="let componente of tecnicoentienda" class="componente">
+                        <div *ngFor="let componente of tecnicoentienda" class="componente" (click)="editarComponente(componente)">
                             <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
                             <div class="componenteStock">{{componente.stock}} unidades.</div>
                             <div class="componenteMarca">{{componente.marca}}</div>
@@ -49,7 +49,7 @@
                 <h2>Consumo interno</h2>
                 <div class="componenteWrapper">
                     <div class="innerComponenteWrapper">
-                        <div *ngFor="let componente of consumointerno" class="componente">
+                        <div *ngFor="let componente of consumointerno" class="componente" (click)="editarComponente(componente)">
                             <div class="componenteNombre text-truncate">{{componente.nombre}}</div>
                             <div class="componenteStock">{{componente.stock}} unidades.</div>
                             <div class="componenteMarca">{{componente.marca}}</div>
@@ -71,8 +71,12 @@
             <img src="http://localhost:3000/static/img/{{marca}}.jpg" />
         </button>
     </div>
+
+    <button class="btn btn-lg btn-primary" id="botonNuevoComponente" (click)="ventanaCrear=true">Nuevo Componente</button>
 </div>
 
-<button class="btn btn-lg btn-primary" id="botonNuevoComponente" (click)="ventanaCrear=true">Nuevo Componente</button>
+
+<app-nuevo-stock *ngIf="ventanaCrear" (cerrarVentanaEvent)="cerrarVentanaCrear()"></app-nuevo-stock>
+<app-editar-stock *ngIf="ventanaEditar" (cerrarVentanaEvent)="cerrarVentanaEditar()" [componente]="editTarget"></app-editar-stock>
 
 
