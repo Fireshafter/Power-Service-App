@@ -24,7 +24,7 @@
 <div id="opcionesWrapper">
     <div id="searchBar">
         <input class="form-control" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="buscar()" >
-        <div id="resultWrapper" *ngIf="searchVisible && searchResults.length > 0" class="dropdown-menu">
+        <div id="resultWrapper" *ngIf="searchVisible && searchResults && searchResults.length > 0" class="dropdown-menu">
             <div *ngFor="let result of searchResults" class="result">
                 <a style="color: inherit; outline: none; text-decoration: none;" [routerLink]="['/reparaciones/detalles', {id: result._id}]">
                     <div>

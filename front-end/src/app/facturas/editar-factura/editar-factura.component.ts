@@ -188,15 +188,15 @@ export class EditarFacturaComponent implements OnInit {
     this.cerrar();  
   }
 
-checkComponente(componente){
-  if(componente.nombre){
-    this.coste.controls['categoria'].setValue(componente.categoria)
-    this.tempComponente = {_id: componente._id, nombre: componente.nombre, stock: 0}
-    return componente.nombre
+  checkComponente(componente){
+    if(componente.nombre){
+      this.coste.controls['categoria'].setValue(componente.categoria)
+      this.tempComponente = {_id: componente._id, nombre: componente.nombre, stock: 0}
+      return componente.nombre
+    }
+    
+    else if(componente)
+      return componente
   }
-  
-  else if(componente)
-    return componente
-}
 
 }

@@ -170,7 +170,7 @@
 
             <div class="form-row" id="costesform">
                 <div class="col-9">
-                    <input type="text" class="form-control" formControlName="servicio" required="required" placeholder="Servicio">
+                    <input type="text" class="form-control" formControlName="servicio" required="required" placeholder="Servicio" [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="inputformatter" />
                 </div>
                 <div class="col-3">
                     <input type="text" class="form-control" formControlName="coste" required="required" placeholder="Coste">
@@ -179,7 +179,7 @@
             
 
         </form>
-        <button id="enviar" class="btn btn-success" (click)="enviarCambios()">Aceptar</button>
+        <button id="enviar" class="btn btn-success" (click)="cerrar()">Aceptar</button>
         <button *ngIf="costeoption == 'neutral'" id="cancelar" class="btn btn-primary" (click)="newcoste()">Nuevo coste</button>
         <button *ngIf="costeoption == 'nuevo'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Añadir nuevo</button>
         <button *ngIf="costeoption == 'editar'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Editar</button>

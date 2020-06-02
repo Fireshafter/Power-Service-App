@@ -159,7 +159,7 @@
         </p>
         <div [ngbCollapse]="historial">
             <div class="log" *ngFor="let log of rep.log.reverse()">
-                <h3>{{log.mensaje}}</h3>
+                <h5>{{log.mensaje}}</h5>
                 <b>{{log.usuario}}</b>
                 <span style="float: right; margin-right: 10px;">{{log.fecha | date:'medium'}}</span>
             </div>

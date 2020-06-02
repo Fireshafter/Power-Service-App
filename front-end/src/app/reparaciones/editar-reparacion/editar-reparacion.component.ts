@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 import { Reparacion } from '../clases/reparacion';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cambio } from '../clases/cambio';
+import { Componente } from 'src/app/stock/clases/componente';
+import { ReparacionService } from '../reparacion.service';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-editar-reparacion',
@@ -16,7 +20,7 @@ export class EditarReparacionComponent implements OnInit {
   ordenedit: FormGroup
   coste: FormGroup
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _reparacionService: ReparacionService) { }
 
   @Input() target: String;
   @Input() orden: Reparacion;
@@ -24,6 +28,21 @@ export class EditarReparacionComponent implements OnInit {
   @Output() cerrarVentanaEvent = new EventEmitter();
   costeindex: number;
   costeoption: String = 'neutral';
+
+  componentes: Componente[];
+  tempComponente: any;
+  oldComponente: any;
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this.componentes.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    );
+
+    formatter = (x: {nombre: string}) => x.nombre;
+    inputformatter = (x) => this.checkComponente(x);
 
 
   ngOnInit() {
@@ -53,7 +72,7 @@ export class EditarReparacionComponent implements OnInit {
       taller: [this.orden.taller, [Validators.required]]
     });
 
-    
+    this._reparacionService.getComponentes({categoria: 'vendible'}).subscribe(res => this.componentes = <Componente[]>res);
   }
 
   generarDispositivo(){
@@ -120,6 +139,8 @@ export class EditarReparacionComponent implements OnInit {
       coste: [this.orden.costes[i].coste, [Validators.required]],
     });
     this.costeindex = i;
+    this.tempComponente = {nombre: this.orden.costes[i].servicio, stock: -1};
+    this.oldComponente = {nombre: this.orden.costes[i].servicio, stock: 1};
     this.costeoption = 'editar';
   }
 
@@ -136,10 +157,10 @@ export class EditarReparacionComponent implements OnInit {
   deletecoste(i: number){
     if(confirm('Estas seguro de que quieres eliminar este coste?')){
       let reparacion = this.orden;
-      reparacion.costes.splice(i, 1);
-
-      console.log(reparacion);
+      console.log(reparacion.costes[i]);
       
+      this._reparacionService.editarStock({nombre: reparacion.costes[i].servicio, stock: 1}).subscribe();
+      reparacion.costes.splice(i, 1);
 
       this.actualizacionEvent.emit(reparacion);
     }
@@ -150,8 +171,13 @@ export class EditarReparacionComponent implements OnInit {
       return alert('Formulario inválido');
     
     let coste = this.coste.value;
+
+    if(coste.servicio.nombre)
+      coste.servicio = coste.servicio.nombre;
+    
     if(coste.coste.toString().includes(','))
       coste.coste = coste.coste.replace(',','.');
+    
     let reparacion = this.orden;
 
     console.log(this.orden);
@@ -160,25 +186,43 @@ export class EditarReparacionComponent implements OnInit {
     switch(this.costeoption){    
       case 'nuevo':
         reparacion.costes.push(coste);
+
+        if(this.tempComponente && coste.servicio == this.tempComponente.nombre)
+          this._reparacionService.editarStock(this.tempComponente).subscribe()
+          
         break;
 
       case 'editar':
         reparacion.costes[this.costeindex] = coste;
         this.costeoption = 'nuevo'
+
+        console.log(this.tempComponente.nombre, this.oldComponente.nombre);
+        this.tempComponente.nombre = coste.servicio;
+
+        if(this.tempComponente.nombre != this.oldComponente.nombre){
+          this._reparacionService.editarStock(this.tempComponente).subscribe();
+          this._reparacionService.editarStock(this.oldComponente).subscribe();
+        }          
+
         break;
       }
-      
-      this.coste.reset(); 
-  }
-
-  enviarCambios(){
-    let reparacion = this.orden;
 
     reparacion.log.push(new Cambio('Developer', 'Se han editado los costes', new Date(Date.now())));
     reparacion.ultimaedicion = new Date(Date.now());    
 
     this.actualizacionEvent.emit(reparacion);
-    this.cerrar();
+      
+    this.coste.reset(); 
+  }
+
+  checkComponente(componente){
+    if(componente.nombre){
+      this.tempComponente = {_id: componente._id, nombre: componente.nombre, stock: -1};      
+      return componente.nombre;
+    }
+    
+    else if(componente)
+      return componente;
   }
 
   cerrar(){

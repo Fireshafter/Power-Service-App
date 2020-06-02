@@ -41,6 +41,14 @@ export class ReparacionService {
     return this._http.get(`${this.URL}/reparaciones/last`);
   }
 
+  getComponentes(params: any){
+    return this._http.get(`${this.URL}/componentes`, {params: params})
+  }
+
+  editarStock(params: any){
+    return this._http.put(`${this.URL}/componentes/stock/${params._id}`, params)
+  }
+
   verDetalle(id: Number){
     return this._http.get(`${this.URL}/reparaciones/${id}`);
   }
