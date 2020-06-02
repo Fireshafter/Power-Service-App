@@ -30,6 +30,10 @@ export class EditarFacturaComponent implements OnInit {
   distribuidores: Distribuidor[];
   componentes: Componente[];
 
+  tempComponente: any;
+  oldComponente: any;
+  updateStocks: boolean = true;
+
   search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -81,6 +85,8 @@ export class EditarFacturaComponent implements OnInit {
       precio: [this.fac.costes[i].precio, [Validators.required]],
     });
     this.costeindex = i;
+    this.tempComponente = {nombre: this.fac.costes[i].concepto, stock: 0, oldstock: this.fac.costes[i].cantidad};
+    this.oldComponente = {nombre: this.fac.costes[i].concepto, stock: this.fac.costes[i].cantidad};
     this.costeoption = 'editar';
   }
 
@@ -99,10 +105,13 @@ export class EditarFacturaComponent implements OnInit {
   deletecoste(i: number){
     if(confirm('Estas seguro de que quieres eliminar este coste?')){
       let factura = this.fac;
-      factura.costes.splice(i, 1);
+      console.log(factura.costes[i]);
 
-      console.log(factura);
+      if(this.updateStocks)
+        this._facturaService.editarStock({nombre: factura.costes[i].concepto, stock: factura.costes[i].cantidad * -1}).subscribe();
       
+      factura.costes.splice(i, 1);
+      console.log(factura);
 
       this.actualizarFacturaEvent.emit(factura);
     }
@@ -110,7 +119,7 @@ export class EditarFacturaComponent implements OnInit {
 
   generarcoste(){
     let numericseparators = [".", ","];
-    if(this.coste.invalid || isNaN(parseInt(this.coste.value.precio)) || isNaN(parseInt(this.coste.value.cantidad)) || numericseparators.some(el => this.coste.value.cantidad.toString().includes(el)) )
+    if(this.coste.invalid || isNaN(parseInt(this.coste.value.precio)) || isNaN(parseInt(this.coste.value.cantidad))|| this.coste.value.cantidad <=0 || this.coste.value.precio <=0 || numericseparators.some(el => this.coste.value.cantidad.toString().includes(el)) )
       return alert('Formulario inválido');
     
     let coste = this.coste.value;
@@ -123,25 +132,46 @@ export class EditarFacturaComponent implements OnInit {
     switch(this.costeoption){    
       case 'nuevo':
         factura.costes.push(coste);
+        console.log(this.tempComponente);
+        
+        if(this.updateStocks && this.tempComponente && coste.concepto == this.tempComponente.nombre){
+          this.tempComponente.stock = coste.cantidad;
+          this._facturaService.editarStock(this.tempComponente).subscribe();
+        }
         break;
 
       case 'editar':
         factura.costes[this.costeindex] = coste;
+
+        if(this.updateStocks && this.tempComponente.oldstock && this.tempComponente.nombre == coste.concepto){
+          this.tempComponente.stock = coste.cantidad - this.tempComponente.oldstock;
+          console.log(this.tempComponente);
+          
+          this._facturaService.editarStock(this.tempComponente).subscribe();
+        }
+
+        else if(this.updateStocks && this.tempComponente.nombre == coste.concepto){
+
+          if(this.oldComponente.nombre != this.tempComponente.nombre){
+            this.tempComponente.stock = coste.cantidad
+            this._facturaService.editarStock(this.tempComponente).subscribe();
+            this.oldComponente.stock = this.oldComponente.stock * -1;            
+            this._facturaService.editarStock(this.oldComponente).subscribe();
+          }
+          else{
+            this.tempComponente.stock = coste.cantidad - this.oldComponente.stock;
+            console.log(this.tempComponente);
+          
+            this._facturaService.editarStock(this.tempComponente).subscribe();
+          }
+            
+        }
         this.costeoption = 'nuevo'
         break;
       }
       
+      this.actualizarFacturaEvent.emit(factura);
       this.coste.reset(); 
-  }
-
-  enviarCambios(){
-    let factura = this.fac;
-
-    console.log(factura);
-    
-
-    this.actualizarFacturaEvent.emit(factura);
-    this.cerrar();
   }
   
   cerrar(){
@@ -161,6 +191,7 @@ export class EditarFacturaComponent implements OnInit {
 checkComponente(componente){
   if(componente.nombre){
     this.coste.controls['categoria'].setValue(componente.categoria)
+    this.tempComponente = {_id: componente._id, nombre: componente.nombre, stock: 0}
     return componente.nombre
   }
   

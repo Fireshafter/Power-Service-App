@@ -25,6 +25,9 @@ export class NuevaFacturaComponent implements OnInit {
   componentes: Componente[];
   componente: Componente = new Componente('', '', '', 0);
 
+  tempComponente: any;
+  stocks: any[] = [];
+
   @Output() cerrarVentanaEvent = new EventEmitter();
 
   search = (text$: Observable<string>) =>
@@ -77,7 +80,14 @@ export class NuevaFacturaComponent implements OnInit {
     let fac = this.factura.value;
     let factura = new Factura(fac.distribuidor, fac.idfactura, this.costes, new Date(Date.now()), fac.comentario);
 
+    this.editarStocks();
     this.crearFactura(factura);
+  }
+
+  editarStocks(){
+    this.stocks.forEach(stock => {
+      this._facturaService.editarStock(stock).subscribe();
+    });
   }
 
   generarCoste(){
@@ -87,6 +97,11 @@ export class NuevaFacturaComponent implements OnInit {
 
       if(coste.concepto.nombre)
         coste.concepto = coste.concepto.nombre
+
+      if(coste.concepto == this.tempComponente.nombre){
+        this.tempComponente.stock = coste.cantidad;
+        this.stocks.push(this.tempComponente);
+      }
       
       this.costes.push(coste);
       this.coste.reset();
@@ -122,6 +137,7 @@ export class NuevaFacturaComponent implements OnInit {
   checkCategoria(){    
     if(this.coste.value.concepto.nombre){
       this.coste.controls['categoria'].setValue(this.coste.value.concepto.categoria)
+      this.tempComponente = {_id: this.coste.value.concepto._id, nombre: this.coste.value.concepto.nombre, stock: 0};      
     }
   }
 

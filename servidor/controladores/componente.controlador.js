@@ -42,6 +42,15 @@ componenteCtrl.editarComponente = async (req, res) => {
     res.json({estado: 'editado'})
 }
 
+componenteCtrl.editarStock = async (req, res) => {
+    if(req.params.id != 'undefined')
+        await Componente.findByIdAndUpdate(req.params.id, {$inc: {stock: req.body.stock}}, {new: false})
+    else
+        await Componente.updateOne({nombre: req.body.nombre}, {$inc: {stock: req.body.stock}})
+        
+     res.json({estado: 'editado'})
+}
+
 componenteCtrl.getMarcas = async (req, res) => {
     const marcas = await Componente.find({categoria: {$ne: 'Consumo interno'}}).distinct("marca")
     res.json(marcas)

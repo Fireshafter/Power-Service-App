@@ -37,9 +37,12 @@ export class FacturaService {
     return this._http.get(`${this.URL}/distribuidores`)
   }
   
-  //@TODO quitar esta mierda y ponerlo en un servicio a parte
   getComponentes(params: any){
     return this._http.get(`${this.URL}/componentes`, {params: params})
+  }
+
+  editarStock(params: any){
+    return this._http.put(`${this.URL}/componentes/stock/${params._id}`, params)
   }
 
   getSize(params: any){

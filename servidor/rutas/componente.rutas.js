@@ -12,6 +12,8 @@ router.get('/marcas', componente.getMarcas)
 
 router.put('/:id', componente.editarComponente)
 
+router.put('/stock/:id', componente.editarStock)
+
 router.post('/', componente.crearComponente)
 
 router.delete('/:id', componente.eliminarComponente)

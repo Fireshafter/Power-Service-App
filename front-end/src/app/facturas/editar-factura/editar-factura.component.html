@@ -89,9 +89,13 @@
                 </div>
             </div>
             
+            <div id="updatestock" class="form-group form-check" title="Si tiene esta opción activada los cambios en la factura se verán reflejados en los stocks">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="updateStocks" [ngModelOptions]="{standalone: true}">
+                <label class="form-check-label" >Actualizar stocks</label>
+            </div>
 
         </form>
-        <button id="enviar" class="btn btn-success" (click)="enviarCambios()">Aceptar</button>
+        <button id="enviar" class="btn btn-success" (click)="cerrar()">Aceptar</button>
         <button *ngIf="costeoption == 'neutral'" id="cancelar" class="btn btn-primary" (click)="newcoste()">Nuevo coste</button>
         <button *ngIf="costeoption == 'nuevo'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Añadir nuevo</button>
         <button *ngIf="costeoption == 'editar'" id="cancelar" class="btn btn-primary" (click)="generarcoste()">Editar</button>
