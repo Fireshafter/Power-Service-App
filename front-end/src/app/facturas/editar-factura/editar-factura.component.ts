@@ -105,13 +105,11 @@ export class EditarFacturaComponent implements OnInit {
   deletecoste(i: number){
     if(confirm('Estas seguro de que quieres eliminar este coste?')){
       let factura = this.fac;
-      console.log(factura.costes[i]);
 
       if(this.updateStocks)
         this._facturaService.editarStock({nombre: factura.costes[i].concepto, stock: factura.costes[i].cantidad * -1}).subscribe();
       
       factura.costes.splice(i, 1);
-      console.log(factura);
 
       this.actualizarFacturaEvent.emit(factura);
     }
@@ -132,7 +130,6 @@ export class EditarFacturaComponent implements OnInit {
     switch(this.costeoption){    
       case 'nuevo':
         factura.costes.push(coste);
-        console.log(this.tempComponente);
         
         if(this.updateStocks && this.tempComponente && coste.concepto == this.tempComponente.nombre){
           this.tempComponente.stock = coste.cantidad;
@@ -145,7 +142,6 @@ export class EditarFacturaComponent implements OnInit {
 
         if(this.updateStocks && this.tempComponente.oldstock && this.tempComponente.nombre == coste.concepto){
           this.tempComponente.stock = coste.cantidad - this.tempComponente.oldstock;
-          console.log(this.tempComponente);
           
           this._facturaService.editarStock(this.tempComponente).subscribe();
         }
@@ -160,7 +156,6 @@ export class EditarFacturaComponent implements OnInit {
           }
           else{
             this.tempComponente.stock = coste.cantidad - this.oldComponente.stock;
-            console.log(this.tempComponente);
           
             this._facturaService.editarStock(this.tempComponente).subscribe();
           }
@@ -182,7 +177,6 @@ export class EditarFacturaComponent implements OnInit {
     const datos = this.factura.value;
     let factura: Factura = new Factura(datos.distribuidor, datos.idfactura, this.costes, new Date(this.fecha.year, this.fecha.month - 1, this.fecha.day), datos.comentario, this.fac._id);
 
-    console.log(factura);
     
     this.actualizarFacturaEvent.emit(factura);
     this.cerrar();  

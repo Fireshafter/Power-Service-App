@@ -52,9 +52,7 @@ export class DetalleFacturaComponent implements OnInit {
 
   actualizar(factura: Factura){
     this.fac = factura;
-    this._facturaService.editar(factura).subscribe(res => {
-      console.log(res);
-    });
+    this._facturaService.editar(factura).subscribe();
   }
 
 }

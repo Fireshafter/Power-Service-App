@@ -18,6 +18,12 @@ facturaCtrl.getFacturas = async (req, res) => {
     res.json(facturas)
 }
 
+facturaCtrl.getMainFacturas = async (req, res) => {
+
+    facturas = await Factura.find().sort({fecha: -1}).limit(Number(5));
+    res.json(facturas)
+}
+
 facturaCtrl.getFacturasCount = async (req, res) => {
     const distribuidoresStr = req.query.distribuidores
     let count

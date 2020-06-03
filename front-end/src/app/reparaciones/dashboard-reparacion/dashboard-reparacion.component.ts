@@ -47,7 +47,6 @@ export class DashboardReparacionComponent implements OnInit {
   crear(reparacion: Reparacion){
 
     this._reparacionService.getLast().subscribe(lastorden => {
-      console.log(lastorden['error'])
       
       if(!lastorden['error'])
         reparacion.orden = lastorden[0].orden + 1;
@@ -93,7 +92,6 @@ export class DashboardReparacionComponent implements OnInit {
       }
       
     this.getResguardos();
-    console.log(this.selectedPage);
   }
 
   getResguardosCount(){

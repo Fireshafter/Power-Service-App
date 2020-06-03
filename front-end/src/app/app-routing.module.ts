@@ -6,9 +6,11 @@ import {DashboardFacturaComponent} from './facturas/dashboard-factura/dashboard-
 import {DetalleFacturaComponent} from './facturas/detalle-factura/detalle-factura.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import {DashboardStockComponent} from './stock/dashboard-stock/dashboard-stock.component'
+import { MainComponent } from './main/main.component';
 
 
 const routes: Routes = [
+  {path: 'home', component: MainComponent},
   {path: 'reparaciones', component: DashboardReparacionComponent},
   {path: 'reparaciones/detalles', component: DetalleReparacionComponent},
   {path: 'facturas', component: DashboardFacturaComponent},

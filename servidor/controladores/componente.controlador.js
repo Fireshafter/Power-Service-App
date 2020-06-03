@@ -30,6 +30,28 @@ componenteCtrl.getComponentes = async (req, res) => {
     res.json(componentes)
 }
 
+componenteCtrl.getMainComponentes = async (req, res) => {    
+
+    const marca = req.query.marca;
+
+    let pantallas = await Componente.aggregate([{$match: {categoria: "Pantallas", marca: marca}}, {$group: {_id: marca, total: {$sum: "$stock"}}}])
+    let baterias = await Componente.aggregate([{$match: {categoria: "Baterias", marca: marca}}, {$group: {_id: marca, total: {$sum: "$stock"}}}])
+    let tecnicotienda = await Componente.aggregate([{$match: {categoria: "Técnico en tienda", marca: marca}}, {$group: {_id: marca, total: {$sum: "$stock"}}}])
+    
+    let marcadata = {marca: marca,pantallas: 0, baterias: 0, tecnicotienda: 0}
+    
+    if(pantallas[0])
+        marcadata.pantallas = pantallas[0].total
+    
+    if(baterias[0])
+        marcadata.baterias = baterias[0].total
+    
+    if(tecnicotienda[0])
+        marcadata.tecnicotienda = tecnicotienda[0].total
+    
+    res.json(marcadata)
+}
+
 componenteCtrl.crearComponente = async (req, res) => {
     const componente = new Componente(req.body)
     

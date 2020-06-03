@@ -93,7 +93,6 @@ export class DashboardFacturaComponent implements OnInit {
       }
       
     this.getFacturas();
-    console.log(this.selectedPage);
   }
 
   toggleDistribuidor(nombre: String){
@@ -105,9 +104,6 @@ export class DashboardFacturaComponent implements OnInit {
     this.arrayToString(this.selectedDistribuidores)
     this.getFacturas();
     this.getFacturasCount();
-
-
-    console.log(this.selectedPage);
     
   }
 

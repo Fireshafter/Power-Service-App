@@ -91,7 +91,6 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.log.push(new Cambio('Developer', 'Se ha editado el dispositivo', new Date(Date.now())))
     reparacion.ultimaedicion = new Date(Date.now());
     
-    console.log(reparacion);
     this.actualizacionEvent.emit(reparacion);
     this.dispositivo.reset();
     
@@ -105,7 +104,6 @@ export class EditarReparacionComponent implements OnInit {
     let cliente = this.cliente.value;
     let reparacion = this.orden;
     reparacion.cliente = cliente;
-    console.log(this.cliente.value)
 
     reparacion.log.push(new Cambio('Developer', 'Se ha editado el cliente', new Date(Date.now())))
     reparacion.ultimaedicion = new Date(Date.now());
@@ -181,9 +179,6 @@ export class EditarReparacionComponent implements OnInit {
       coste.coste = coste.coste.replace(',','.');
     
     let reparacion = this.orden;
-
-    console.log(this.orden);
-
     
     switch(this.costeoption){    
       case 'nuevo':
@@ -198,7 +193,6 @@ export class EditarReparacionComponent implements OnInit {
         reparacion.costes[this.costeindex] = coste;
         this.costeoption = 'nuevo'
 
-        console.log(this.tempComponente.nombre, this.oldComponente.nombre);
         this.tempComponente.nombre = coste.servicio;
 
         if(this.updateStocks && this.tempComponente.nombre != this.oldComponente.nombre){

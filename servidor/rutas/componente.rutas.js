@@ -6,6 +6,8 @@ const componente = require('../controladores/componente.controlador')
 
 router.get('/', componente.getComponentes)
 
+router.get('/main', componente.getMainComponentes)
+
 router.get('/byname', componente.getComponenteByName)
 
 router.get('/marcas', componente.getMarcas)

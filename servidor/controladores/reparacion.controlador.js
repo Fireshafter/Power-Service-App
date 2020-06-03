@@ -15,6 +15,12 @@ reparacionCtrl.getReparaciones = async (req, res) => {
     res.json(reparaciones)
 }
 
+reparacionCtrl.getMainReparaciones = async (req, res) => {
+    
+    const reparaciones = await Reparacion.find().sort({orden: -1}).limit(7)
+    res.json(reparaciones)
+}
+
 reparacionCtrl.getReparacion = async (req, res) => {  
     
     if(mongoose.Types.ObjectId.isValid(req.params.id)){  

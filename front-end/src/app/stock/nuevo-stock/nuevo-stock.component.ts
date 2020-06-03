@@ -42,7 +42,6 @@ export class NuevoStockComponent implements OnInit {
 
   crearComponente(){
     if(this.stock.valid){
-      console.log(this.stock.value);
       let componente = this.stock.value;
       this._stockService.crear(new Componente(componente.nombre, componente.marca, componente.categoria, componente.stock)).subscribe(res => this.cerrar());
     }

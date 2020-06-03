@@ -37,7 +37,6 @@ export class DetalleReparacionComponent implements OnInit {
     if(confirm('Estas seguro de que quieres eliminar PERMANENTEMENTE esta orden?')){
 
       this._reparacionService.borrar(this.rep).subscribe(status => {
-        console.log(status);
         this._router.navigate(['/reparaciones']);
       })
     }    

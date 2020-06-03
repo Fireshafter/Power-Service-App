@@ -6,6 +6,8 @@ const reparacion = require('../controladores/reparacion.controlador')
 
 router.get('/', reparacion.getReparaciones)
 
+router.get('/main', reparacion.getMainReparaciones)
+
 router.get('/last', reparacion.getLastReparacion)
 
 router.get('/size', reparacion.getReparacionesCount)

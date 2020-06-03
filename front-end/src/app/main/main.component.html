@@ -1,0 +1,80 @@
+<div id="contentWrapper" class="container-fluid">
+    <div *ngIf="reparaciones" class="categoriaWrapper">
+        <div class="categoria">
+            <a [routerLink]="['/reparaciones/']" class="categoriaLink">
+                <h2>Reparaciones</h2>
+            </a>
+            <div class="componenteWrapper">
+                <div class="innerComponenteWrapper" id="resguardosWrapper">
+                    <div class="resguardoWrapper" *ngFor="let resguardo of reparaciones">
+                        <a [routerLink]="['/reparaciones/detalles', {id: resguardo._id}]" style="outline: none; color: inherit;">
+                            <div class="orden" >
+                                <span class="norden">{{resguardo.orden}}</span>
+                                <span class="cliente">{{resguardo.cliente.nombre}} {{resguardo.cliente.apellidos}}</span>
+                                <div class="dispositivo">
+                                    <span class="disp">{{resguardo.dispositivo.nombre}}</span>
+                                    <span>{{resguardo.titulo}}</span>
+                                </div>
+                                <span class="estado">{{resguardo.estado}}</span>
+                                <span class="fecha">{{resguardo.fechacreacion | date:'short'}}</span>
+                                <span class="dias" *ngIf="getDays(resguardo.fechacreacion) as delta">{{delta | number:'1.0-0'}} Dias</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="facturas" class="categoriaWrapper categoriaWrapperThin">
+        <div class="categoria">
+            <a [routerLink]="['/facturas/']" class="categoriaLink">
+                <h2>Facturas</h2>
+            </a>
+            <div class="componenteWrapper">
+                <div class="innerComponenteWrapper" id="facturasWrapper">
+                    <div *ngFor="let factura of facturas" class="facturaWrapper">
+                        <a [routerLink]="['/facturas/detalles', {id: factura._id}]" style="outline: none;">
+                            <div class="factura">
+                                <img src="http://localhost:3000/static/img/{{factura.distribuidor}}.jpg" />
+                                <h3>{{factura.distribuidor}}</h3>
+                                <div class="fechafactura">{{factura.fecha | date: 'dd/MM/yyyy'}}</div>
+                                <h2>{{getTotal(factura) | currency: '':''}}€</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="stock" class="categoriaWrapper categoriaWrapperThin">
+        <div class="categoria">
+            <a [routerLink]="['/stock/']" class="categoriaLink">
+                <h2>Stock</h2>
+            </a>
+            <div class="componenteWrapper">
+                <div class="innerComponenteWrapper">
+                    <div *ngFor="let stats of stock" class="marcaStatsWrapper">
+                            <div class="marcaStats">
+                                <img src="http://localhost:3000/static/img/{{stats.marca}}.jpg" />
+                                <h3>{{stats.marca}}</h3>
+                                <div class="marcaStocksLabels">
+                                    <div>Pantallas:</div>
+                                    <div>Baterias:</div>
+                                    <div>Técnico en tienda:</div>
+                                </div>
+                                <div class="marcaStocksData">
+                                    <div>{{stats.pantallas}} uds.</div>
+                                    <div>{{stats.baterias}} uds.</div>
+                                    <div>{{stats.tecnicotienda}} uds.</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
