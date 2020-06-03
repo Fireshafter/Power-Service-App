@@ -32,6 +32,7 @@ export class EditarReparacionComponent implements OnInit {
   componentes: Componente[];
   tempComponente: any;
   oldComponente: any;
+  updateStocks:boolean= true;
 
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -157,10 +158,11 @@ export class EditarReparacionComponent implements OnInit {
   deletecoste(i: number){
     if(confirm('Estas seguro de que quieres eliminar este coste?')){
       let reparacion = this.orden;
-      console.log(reparacion.costes[i]);
       
-      this._reparacionService.editarStock({nombre: reparacion.costes[i].servicio, stock: 1}).subscribe();
-      reparacion.costes.splice(i, 1);
+      if(this.updateStocks)
+        this._reparacionService.editarStock({nombre: reparacion.costes[i].servicio, stock: 1}).subscribe();
+      
+        reparacion.costes.splice(i, 1);
 
       this.actualizacionEvent.emit(reparacion);
     }
@@ -187,7 +189,7 @@ export class EditarReparacionComponent implements OnInit {
       case 'nuevo':
         reparacion.costes.push(coste);
 
-        if(this.tempComponente && coste.servicio == this.tempComponente.nombre)
+        if(this.updateStocks && this.tempComponente && coste.servicio == this.tempComponente.nombre)
           this._reparacionService.editarStock(this.tempComponente).subscribe()
           
         break;
@@ -199,7 +201,7 @@ export class EditarReparacionComponent implements OnInit {
         console.log(this.tempComponente.nombre, this.oldComponente.nombre);
         this.tempComponente.nombre = coste.servicio;
 
-        if(this.tempComponente.nombre != this.oldComponente.nombre){
+        if(this.updateStocks && this.tempComponente.nombre != this.oldComponente.nombre){
           this._reparacionService.editarStock(this.tempComponente).subscribe();
           this._reparacionService.editarStock(this.oldComponente).subscribe();
         }          

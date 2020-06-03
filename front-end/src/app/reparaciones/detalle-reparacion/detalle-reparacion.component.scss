@@ -16,17 +16,35 @@
     margin-left: 20px;
 }
 
-#sidewrapper{
-    position: absolute;
-    top: 90px;
-    right: 10px;
-    padding-top: 50px;
+#titulo {
+    overflow: auto;
 }
 
-#opciones{
-    
-    width: 95%;
-    float: right;
+#contentWrapper{
+    overflow: auto;
+    position: relative;
+    min-width: 930px;
+}
+
+#sidewrapper{
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    min-width: 260px;
+}
+
+.opcionesWrapper{
+    overflow: auto;
+}
+
+.opciones{
+    margin: 20px 10px !important;
+    margin-top: 0px !important;
+}
+
+.opciones img{
+    width: 100%;
+    height: auto;
 }
 
 .collapse-inf{

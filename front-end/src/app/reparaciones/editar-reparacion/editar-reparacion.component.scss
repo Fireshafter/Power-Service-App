@@ -11,6 +11,7 @@
     padding-top: 60px;
     padding-bottom: 60px;
     z-index: 10;
+    min-width: 915px;
 }
 
 .form-row{
@@ -79,4 +80,17 @@
 
 #labelrow{
     margin-bottom: 0px;
+}
+
+#updatestock{
+    position: absolute;
+    bottom: 12px;
+}
+
+#updatestock input{
+    outline: none;
+}
+
+#updatestock label{
+    padding-top: 2px;
 }

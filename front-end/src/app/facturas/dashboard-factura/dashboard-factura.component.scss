@@ -26,6 +26,28 @@
     }
 }
 
+@media (max-width: 730px) {
+    
+    .facturaWrapper{
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    
+    #distribuidorWrapper{
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    
+    #botonNuevaFactura{
+        left: 325px;
+        white-space: nowrap;
+    }
+}
+
 .facturaWrapper{
     float: left;
     padding: 7px 10px;
@@ -82,6 +104,7 @@
 
 #facturas{
     overflow: auto;
+    min-width: 500px;
 }
 
 #pagination {

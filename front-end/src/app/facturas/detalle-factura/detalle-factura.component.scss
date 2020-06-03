@@ -1,3 +1,10 @@
+@media (max-width: 950px){
+    #buttonWrapper{
+        left: 499px;
+        width: 451px;
+    }
+}
+
 #topWrapper{
     position: relative;
     height: 180px;
@@ -15,6 +22,10 @@
     top: 30px;
     left: 200px;
     font-weight: bolder;
+    width: calc(520px + (100% - 950px));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #topWrapper h2{
@@ -41,7 +52,7 @@
 
 #topWrapper p{
     position: absolute;
-    bottom: 20px;
+    top: 120px;
     left: 200px;
 }
 
@@ -64,4 +75,9 @@
 
 #redbutton{
     margin-left: 20px;
+}
+
+#contentWrapper{
+    overflow: auto;
+    min-width: 950px;
 }

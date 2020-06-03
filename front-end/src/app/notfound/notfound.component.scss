@@ -1,14 +1,37 @@
+@media (max-width: 500px){
+    #sadtext{
+        left: 5px;
+    }
+
+    #sadtext h1{
+        font-size: 22pt !important;
+    }
+
+    #sadtext h2{
+        font-size: 12pt !important;
+    }
+}
+
 #sadtext{
-    position: fixed;
+    position: absolute;
     bottom: 100px;
     right: 80px;
     height: 25%;
     user-select: none;
+    min-width: 410px;
+}
+
+#sadtext h1{
+    font-size: 6vw;
+}
+
+#sadtext h2{
+    font-size: 3vw;
 }
 
 #bgimg{
     min-width: 100%;
-    min-height: 1080px;
+    min-height: 100%;
     position: fixed;
     bottom: 0px;
 }
@@ -25,5 +48,6 @@
 }
 
 hr{
-    border: 3px solid white;
+    border: 0.2vw solid white;
+    margin-top: 0.3vw;
 }
