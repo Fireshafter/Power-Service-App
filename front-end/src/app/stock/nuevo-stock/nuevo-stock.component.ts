@@ -4,6 +4,7 @@ import { StockService } from '../stock.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Componente } from '../clases/componente';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-stock',
@@ -12,7 +13,7 @@ import { Componente } from '../clases/componente';
 })
 export class NuevoStockComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder, private _stockService: StockService) { }
+  constructor(private _formBuilder: FormBuilder, private _stockService: StockService, private _toastrService: ToastrService) { }
 
   stock: FormGroup;
   marcas: String[];
@@ -44,9 +45,10 @@ export class NuevoStockComponent implements OnInit {
     if(this.stock.valid){
       let componente = this.stock.value;
       this._stockService.crear(new Componente(componente.nombre, componente.marca, componente.categoria, componente.stock)).subscribe(res => this.cerrar());
+      this._toastrService.success('Se ha creado el componente correctamente', 'Creado');
     }
     else
-      alert('Formulario inválido');
+      this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
       
   }
 

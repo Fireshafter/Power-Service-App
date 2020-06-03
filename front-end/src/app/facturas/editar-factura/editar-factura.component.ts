@@ -7,6 +7,7 @@ import { Distribuidor } from '../clases/distribuidor';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Componente } from '../../stock/clases/componente';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-editar-factura',
@@ -46,7 +47,7 @@ export class EditarFacturaComponent implements OnInit {
 
   inputformatter = (x) => this.checkComponente(x);
 
-  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService) { }
+  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _toastrService: ToastrService) { }
 
   ngOnInit() {
     let fecha = new Date(this.fac.fecha);
@@ -118,7 +119,7 @@ export class EditarFacturaComponent implements OnInit {
   generarcoste(){
     let numericseparators = [".", ","];
     if(this.coste.invalid || isNaN(parseInt(this.coste.value.precio)) || isNaN(parseInt(this.coste.value.cantidad))|| this.coste.value.cantidad <=0 || this.coste.value.precio <=0 || numericseparators.some(el => this.coste.value.cantidad.toString().includes(el)) )
-      return alert('Formulario inválido');
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
     
     let coste = this.coste.value;
     if(coste.precio.toString().includes(','))
@@ -166,6 +167,7 @@ export class EditarFacturaComponent implements OnInit {
       }
       
       this.actualizarFacturaEvent.emit(factura);
+      this._toastrService.success('Se han editado los costes correctamente', 'Actualizado');
       this.coste.reset(); 
   }
   
@@ -174,11 +176,15 @@ export class EditarFacturaComponent implements OnInit {
   }
 
   generarFactura(){
+    if(this.factura.invalid)
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
+
     const datos = this.factura.value;
     let factura: Factura = new Factura(datos.distribuidor, datos.idfactura, this.costes, new Date(this.fecha.year, this.fecha.month - 1, this.fecha.day), datos.comentario, this.fac._id);
 
     
     this.actualizarFacturaEvent.emit(factura);
+    this._toastrService.success('Se ha editado la factura correctamente', 'Actualizado');
     this.cerrar();  
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { Reparacion } from '../clases/reparacion';
 import { Cambio } from '../clases/cambio';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-nueva-reparacion',
@@ -18,7 +20,7 @@ export class NuevaReparacionComponent implements OnInit {
   @Output() crearReparacionEvent = new EventEmitter();
   @Output() cerrarVentanaEvent = new EventEmitter();
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _toastrService: ToastrService) { }
 
   ngOnInit() {
 
@@ -70,6 +72,7 @@ export class NuevaReparacionComponent implements OnInit {
     reparacion.dispositivo.accesorios = accesorios.split(',');
 
     this.crearReparacionEvent.emit(reparacion);
+    this._toastrService.success('Se ha creado la orden correctamente', 'Creada');
     this.cerrar();
   }
 
@@ -77,7 +80,7 @@ export class NuevaReparacionComponent implements OnInit {
     const formularios = [this.reparacion, this.dispositivo, this.cliente]
 
     if(formularios[this.step].invalid)
-      return alert('Formulario inválido');
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
 
     if(this.step < 2){
       this.step++;

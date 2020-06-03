@@ -4,6 +4,9 @@ import { HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es'
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +59,15 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      maxOpened: 5
+    })
   ],
   providers: [
     ReparacionService,

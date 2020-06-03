@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StockService } from '../stock.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-editar-stock',
@@ -12,7 +14,7 @@ import { StockService } from '../stock.service';
 })
 export class EditarStockComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder, private _stockService: StockService) { }
+  constructor(private _formBuilder: FormBuilder, private _stockService: StockService, private _toastrService: ToastrService) { }
 
   @Input() componente: Componente;
   @Output() cerrarVentanaEvent = new EventEmitter;
@@ -45,9 +47,10 @@ export class EditarStockComponent implements OnInit {
     if(this.stock.valid){
       let componente = this.stock.value;
       this._stockService.editar(new Componente(componente.nombre, componente.marca, componente.categoria, componente.stock, this.componente._id)).subscribe(res => this.cerrar());
+      this._toastrService.success('Se ha editado el componente correctamente', 'Actualizado');
     }
     else
-      alert('Formulario no válido')
+      this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
   }
 
   cerrar(){

@@ -6,6 +6,8 @@ import { Componente } from 'src/app/stock/clases/componente';
 import { ReparacionService } from '../reparacion.service';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-editar-reparacion',
@@ -20,7 +22,7 @@ export class EditarReparacionComponent implements OnInit {
   ordenedit: FormGroup
   coste: FormGroup
 
-  constructor(private _formBuilder: FormBuilder, private _reparacionService: ReparacionService) { }
+  constructor(private _formBuilder: FormBuilder, private _reparacionService: ReparacionService, private _toastrService: ToastrService) { }
 
   @Input() target: String;
   @Input() orden: Reparacion;
@@ -78,7 +80,7 @@ export class EditarReparacionComponent implements OnInit {
 
   generarDispositivo(){
     if(this.dispositivo.invalid)
-      return alert('Formulario invalido')
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
 
     let dispositivo = this.dispositivo.value;
     let reparacion = this.orden;
@@ -93,13 +95,13 @@ export class EditarReparacionComponent implements OnInit {
     
     this.actualizacionEvent.emit(reparacion);
     this.dispositivo.reset();
-    
+    this._toastrService.success('Se ha editado el dispositivo correctamente', 'Actualizado');
     this.cerrar()
   }
 
   generarCliente(){
     if(this.cliente.invalid)
-      return alert('Formulario invalido')
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
 
     let cliente = this.cliente.value;
     let reparacion = this.orden;
@@ -109,13 +111,13 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.ultimaedicion = new Date(Date.now());
 
     this.actualizacionEvent.emit(reparacion);
-
+    this._toastrService.success('Se ha editado el cliente correctamente', 'Actualizado');
     this.cerrar();
   }
 
   generarOrden(){
     if(this.ordenedit.invalid)
-      return alert('Formulario inválido');
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
 
     let orden = this.ordenedit.value;
     let reparacion = this.orden;
@@ -128,7 +130,7 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.ultimaedicion = new Date(Date.now()); 
 
     this.actualizacionEvent.emit(reparacion);
-
+    this._toastrService.success('Se ha editado la orden correctamente', 'Actualizado');
     this.cerrar();
   }
   
@@ -168,7 +170,7 @@ export class EditarReparacionComponent implements OnInit {
 
   generarcoste(){
     if(this.coste.invalid || isNaN(parseInt(this.coste.value.coste)))
-      return alert('Formulario inválido');
+      return this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
     
     let coste = this.coste.value;
 
@@ -207,7 +209,7 @@ export class EditarReparacionComponent implements OnInit {
     reparacion.ultimaedicion = new Date(Date.now());    
 
     this.actualizacionEvent.emit(reparacion);
-      
+    this._toastrService.success('Se han editado los costes correctamente', 'Actualizado');
     this.coste.reset(); 
   }
 

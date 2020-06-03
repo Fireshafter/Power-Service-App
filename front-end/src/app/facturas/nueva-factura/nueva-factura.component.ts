@@ -8,6 +8,7 @@ import { Distribuidor } from '../clases/distribuidor';
 import { Componente } from '../../stock/clases/componente';
 import { Observable } from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class NuevaFacturaComponent implements OnInit {
   formatter = (x: {nombre: string}) => x.nombre;
   inputformatter = (x: {nombre: string}) => x.nombre;
 
-  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _router: Router) { }
+  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _router: Router, private _toastrService: ToastrService) { }
 
   ngOnInit() {
 
@@ -82,6 +83,7 @@ export class NuevaFacturaComponent implements OnInit {
 
     this.editarStocks();
     this.crearFactura(factura);
+    this._toastrService.success('Se ha creado la factura correctamente', 'Creada');
   }
 
   editarStocks(){
@@ -107,7 +109,7 @@ export class NuevaFacturaComponent implements OnInit {
       this.coste.reset();
     }
     else
-      alert('Formulario inválido')
+      this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
   }
 
   crearFactura(factura: Factura){
@@ -124,7 +126,7 @@ export class NuevaFacturaComponent implements OnInit {
       this.generarFactura();
     
     else
-      alert('Formulario inválido')
+      this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
   }
 
   checkCoste(coste){
