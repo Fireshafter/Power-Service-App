@@ -19,6 +19,10 @@
     </div>
 </div>
 
+<div id="searchBar">
+    <input class="form-control" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="getFacturas()" >
+</div>
+
 <div id="distribuidorWrapper">
     <button *ngFor="let distribuidor of distribuidores" (click)="toggleDistribuidor(distribuidor.nombre)" [ngClass]="selectedDistribuidores.includes(distribuidor.nombre) ? 'btn-primary' : 'btn-danger'" class="distribuidorButton btn btn-lg" title="{{distribuidor.nombre}}">
         <img src="http://localhost:3000/static/img/{{distribuidor.nombre}}.jpg" />

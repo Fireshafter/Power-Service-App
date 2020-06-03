@@ -33,14 +33,21 @@
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
     
     #distribuidorWrapper{
         display: none;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 750px) {
+    
+    #searchBar{
+        display: none;
+    }
+}
+
+@media (max-width: 510px) {
     
     #botonNuevaFactura{
         left: 325px;
@@ -153,7 +160,7 @@ border-bottom-right-radius: 5px;
     position: fixed;
     z-index: 10;
     top: 8px;
-    right: 200px;
+    right: 450px;
 }
 
 .distribuidorButton{
@@ -164,4 +171,13 @@ border-bottom-right-radius: 5px;
 .distribuidorButton img{
     width: 40px;
     height: 40px;
+}
+
+#searchBar{
+    float: right;
+    margin-left: 20px;
+    position: fixed;
+    top: 13px;
+    right: 200px;
+    z-index: 8;
 }

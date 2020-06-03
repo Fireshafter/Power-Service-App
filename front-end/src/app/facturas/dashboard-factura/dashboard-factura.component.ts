@@ -25,6 +25,7 @@ export class DashboardFacturaComponent implements OnInit {
   maxPage: number
   size: any;
   pagsize: number = 30;
+  searchTerm: String;
 
   ngOnInit() {
     this.getFacturasCount();
@@ -51,7 +52,7 @@ export class DashboardFacturaComponent implements OnInit {
   }
   
   getFacturas(){
-    this._facturaService.listar({pag: this.selectedPage, pagsize: this.pagsize, distribuidores: this.selectedDistStr}).subscribe(res => {
+    this._facturaService.listar({pag: this.selectedPage, pagsize: this.pagsize, distribuidores: this.selectedDistStr, searchTerm: this.searchTerm}).subscribe(res => {
       this.facturas = <Factura[]>res;
     })
   }

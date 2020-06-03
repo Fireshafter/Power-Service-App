@@ -5,11 +5,19 @@ const facturaCtrl = {};
 
 facturaCtrl.getFacturas = async (req, res) => {
     let distribuidoresStr = req.query.distribuidores
+    let searchTerm = req.query.searchTerm
     let facturas = null
+
+    console.log(searchTerm)
+    
 
     if(distribuidoresStr != 'undefined'){
         let distribuidores = distribuidoresStr.split(',')
-        facturas = await Factura.find({distribuidor: {$in: distribuidores}}).sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+        
+        if(searchTerm != 'undefined')
+            facturas = await Factura.find({distribuidor: {$in: distribuidores}, idfactura: {$regex: searchTerm, $options: "i"}}).sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
+        else
+            facturas = await Factura.find({distribuidor: {$in: distribuidores}}).sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
     }
     else{
         facturas = await Factura.find().sort({fecha: -1}).skip(Number(req.query.pag) * Number(req.query.pagsize)).limit(Number(req.query.pagsize))
