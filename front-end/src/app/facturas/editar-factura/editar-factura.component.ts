@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Componente } from '../../stock/clases/componente';
 import { ToastrService } from 'ngx-toastr'
+import { DialogoConfirmacionService } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.service';
 
 @Component({
   selector: 'app-editar-factura',
@@ -47,7 +48,7 @@ export class EditarFacturaComponent implements OnInit {
 
   inputformatter = (x) => this.checkComponente(x);
 
-  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _toastrService: ToastrService) { }
+  constructor(private _formBuilder: FormBuilder, private _facturaService: FacturaService, private _toastrService: ToastrService, private _dialogoConfirmacion: DialogoConfirmacionService) { }
 
   ngOnInit() {
     let fecha = new Date(this.fac.fecha);
@@ -103,8 +104,8 @@ export class EditarFacturaComponent implements OnInit {
     this.costeoption = 'nuevo';
   }
 
-  deletecoste(i: number){
-    if(confirm('Estas seguro de que quieres eliminar este coste?')){
+  async deletecoste(i: number){
+    if(await this.confirmar('Confirmar borrado', 'Estas seguro de que quieres eliminar este coste?', 'Eliminar')){
       let factura = this.fac;
 
       if(this.updateStocks)
@@ -197,6 +198,14 @@ export class EditarFacturaComponent implements OnInit {
     
     else if(componente)
       return componente
+  }
+
+  async confirmar(titulo: string, cuerpo: string, aceptar?: string, denegar?: string){
+    let confirmar: boolean;
+    await this._dialogoConfirmacion.confirm(titulo, cuerpo, aceptar, denegar)
+      .then((confirmed) => confirmar = confirmed)
+      .catch(() => confirmar = false)    
+    return confirmar;
   }
 
 }

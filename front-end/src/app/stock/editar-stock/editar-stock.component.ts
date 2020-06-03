@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StockService } from '../stock.service';
 import { ToastrService } from 'ngx-toastr';
+import { DialogoConfirmacionService } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditarStockComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder, private _stockService: StockService, private _toastrService: ToastrService) { }
+  constructor(private _formBuilder: FormBuilder, private _stockService: StockService, private _toastrService: ToastrService, private _dialogoConfirmacion: DialogoConfirmacionService) { }
 
   @Input() componente: Componente;
   @Output() cerrarVentanaEvent = new EventEmitter;
@@ -51,6 +52,22 @@ export class EditarStockComponent implements OnInit {
     }
     else
       this._toastrService.error('Comprueba que todos los campos estén rellenados correctamente', 'Error de formulario');
+  }
+
+  async eliminarComponente(){
+    if(await this.confirmar('Confirmar borrado', 'Estás seguro de que quieres eliminar este coste?', 'Eliminar'))
+      this._stockService.borrar(this.componente._id).subscribe(res => {
+        this._toastrService.success('Se ha eliminado el componente correctamente', 'Eliminado');
+        this.cerrar();
+      })
+  }
+
+  async confirmar(titulo: string, cuerpo: string, aceptar?: string, denegar?: string){
+    let confirmar: boolean;
+    await this._dialogoConfirmacion.confirm(titulo, cuerpo, aceptar, denegar)
+      .then((confirmed) => confirmar = confirmed)
+      .catch(() => confirmar = false)    
+    return confirmar;
   }
 
   cerrar(){

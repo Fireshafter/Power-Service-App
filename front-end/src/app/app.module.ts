@@ -29,6 +29,8 @@ import { DashboardStockComponent } from './stock/dashboard-stock/dashboard-stock
 import { NuevoStockComponent } from './stock/nuevo-stock/nuevo-stock.component';
 import { EditarStockComponent } from './stock/editar-stock/editar-stock.component';
 import { MainComponent } from './main/main.component';
+import { DialogoConfirmacionComponent } from './dialogo-confirmacion/dialogo-confirmacion.component';
+import { DialogoConfirmacionService } from './dialogo-confirmacion/dialogo-confirmacion.service';
 
 registerLocaleData(localeEs, 'es');
 
@@ -52,6 +54,7 @@ registerLocaleData(localeEs, 'es');
     NuevoStockComponent,
     EditarStockComponent,
     MainComponent,
+    DialogoConfirmacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,9 @@ registerLocaleData(localeEs, 'es');
       preventDuplicates: true,
       maxOpened: 5
     })
+  ],
+  entryComponents:[
+    DialogoConfirmacionComponent
   ],
   providers: [
     ReparacionService,

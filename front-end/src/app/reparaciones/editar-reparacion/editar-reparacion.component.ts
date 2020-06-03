@@ -7,6 +7,7 @@ import { ReparacionService } from '../reparacion.service';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { DialogoConfirmacionService } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class EditarReparacionComponent implements OnInit {
   ordenedit: FormGroup
   coste: FormGroup
 
-  constructor(private _formBuilder: FormBuilder, private _reparacionService: ReparacionService, private _toastrService: ToastrService) { }
+  constructor(private _formBuilder: FormBuilder, private _reparacionService: ReparacionService, private _toastrService: ToastrService, private _dialogoConfirmacion: DialogoConfirmacionService) { }
 
   @Input() target: String;
   @Input() orden: Reparacion;
@@ -155,8 +156,8 @@ export class EditarReparacionComponent implements OnInit {
     this.costeoption = 'nuevo';
   }
 
-  deletecoste(i: number){
-    if(confirm('Estas seguro de que quieres eliminar este coste?')){
+  async deletecoste(i: number){
+    if(await this.confirmar('Confirmar borrado', 'Estas seguro de que quieres eliminar este coste?', 'Eliminar')){
       let reparacion = this.orden;
       
       if(this.updateStocks)
@@ -221,6 +222,14 @@ export class EditarReparacionComponent implements OnInit {
     
     else if(componente)
       return componente;
+  }
+
+  async confirmar(titulo: string, cuerpo: string, aceptar?: string, denegar?: string){
+    let confirmar: boolean;
+    await this._dialogoConfirmacion.confirm(titulo, cuerpo, aceptar, denegar)
+      .then((confirmed) => confirmar = confirmed)
+      .catch(() => confirmar = false)    
+    return confirmar;
   }
 
   cerrar(){

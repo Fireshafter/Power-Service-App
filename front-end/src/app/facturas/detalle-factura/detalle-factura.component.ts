@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Factura } from '../clases/factura';
 import { FacturaService } from '../factura.service';
+import { DialogoConfirmacionService } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalle-factura',
@@ -10,7 +12,7 @@ import { FacturaService } from '../factura.service';
 })
 export class DetalleFacturaComponent implements OnInit {
 
-  constructor(private _route: ActivatedRoute, private _facturaService: FacturaService, private _router: Router) { }
+  constructor(private _route: ActivatedRoute, private _facturaService: FacturaService, private _router: Router, private _dialogoConfirmacion: DialogoConfirmacionService, private _toastrService: ToastrService) { }
 
   facturaid: any;
   fac: Factura;
@@ -38,11 +40,12 @@ export class DetalleFacturaComponent implements OnInit {
     return total;
   }
 
-  eliminar(){
-    if(confirm('Estás seguro de que quieres borrar PERMANENTEMENTE esta factura?'))
-    this._facturaService.borrar(this.facturaid).subscribe(res => {
-      this._router.navigate(['/facturas']);
-    });
+  async eliminar(){
+    if(await this.confirmar('Confirmar borrado', '¿Estás seguro de que quieres borrar PERMANENTEMENTE esta factura?', 'Eliminar'))
+      this._facturaService.borrar(this.facturaid).subscribe(res => {
+        this._toastrService.success('Se ha eliminado la factura correctamente', 'Eliminado');
+        this._router.navigate(['/facturas']);
+      });
   }
 
   editar(target: any){
@@ -53,6 +56,14 @@ export class DetalleFacturaComponent implements OnInit {
   actualizar(factura: Factura){
     this.fac = factura;
     this._facturaService.editar(factura).subscribe();
+  }
+
+  async confirmar(titulo: string, cuerpo: string, aceptar?: string, denegar?: string){
+    let confirmar: boolean;
+    await this._dialogoConfirmacion.confirm(titulo, cuerpo, aceptar, denegar)
+      .then((confirmed) => confirmar = confirmed)
+      .catch(() => confirmar = false)    
+    return confirmar;
   }
 
 }
