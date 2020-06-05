@@ -1,4 +1,5 @@
 const Factura = require('../modelos/factura')
+const Componente = require('../modelos/componente')
 const mongoose = require('mongoose')
 
 const facturaCtrl = {};
@@ -61,6 +62,11 @@ facturaCtrl.getFactura = async (req, res) => {
 facturaCtrl.crearFactura = async (req, res) => {
     const factura = new Factura(req.body)
     await factura.save()
+
+    factura.costes.forEach(async coste => {
+        await Componente.updateOne({nombre: coste.concepto}, {$inc: {stock: coste.cantidad}})
+    });
+
     res.json({id: factura._id})
 }
 
