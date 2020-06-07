@@ -33,10 +33,10 @@
     }
 }
 
-@media (max-width: 715px) {
+@media (max-width: 600px) {
     
     #botonNuevoComponente{
-        left: 480px;
+        left: 365px;
         height: 48px;
         width: 211px;
         white-space: nowrap;
@@ -105,7 +105,7 @@
 
 #contentWrapper{
     margin-top: 8px;
-    min-width: 715px;
+    min-width: 600px;
     overflow: auto;
 }
 
